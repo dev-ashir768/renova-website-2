@@ -1,0 +1,102 @@
+{
+  ".claude/launch.json": {
+    "mtime": 1781355994.0788343,
+    "ast_hash": "79c7c0283c3f493111cede44b1f36790",
+    "semantic_hash": ""
+  },
+  ".claude/settings.json": {
+    "mtime": 1781374262.9928427,
+    "ast_hash": "e1073342e958ac9f00716938c8f165e3",
+    "semantic_hash": ""
+  },
+  ".claude/settings.local.json": {
+    "mtime": 1781356879.483229,
+    "ast_hash": "28fb84c5f0cbfb251fd300922c5c258f",
+    "semantic_hash": ""
+  },
+  "assets/js/main.js": {
+    "mtime": 1781365445.144814,
+    "ast_hash": "68605c21fb1fc6834c8ffead7a82bdfb",
+    "semantic_hash": ""
+  },
+  "assets/js/validate.js": {
+    "mtime": 1781365396.6623266,
+    "ast_hash": "c0593af4a1d2e4d40712767323ea14ad",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1781374262.9920757,
+    "ast_hash": "82efb97a359f5c7290bf2513d14686be",
+    "semantic_hash": ""
+  },
+  "about.html": {
+    "mtime": 1781373472.242169,
+    "ast_hash": "b99c10734c8a548569b9e4059e2b8f8f",
+    "semantic_hash": ""
+  },
+  "contact.html": {
+    "mtime": 1781373472.2476346,
+    "ast_hash": "cfd8d8ad3c381a0a5925699dd9ea0c59",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1781373476.4129596,
+    "ast_hash": "6424bd5edabdf7ed754c0b9f5ca21e46",
+    "semantic_hash": ""
+  },
+  "packages.html": {
+    "mtime": 1781373472.2441783,
+    "ast_hash": "c6c95c37e1a579cdb8e645f2b0c40856",
+    "semantic_hash": ""
+  },
+  "requirements/Packages page.md": {
+    "mtime": 1781355375.1289675,
+    "ast_hash": "7c46ae3988f36d6e00a65719ccb506a0",
+    "semantic_hash": ""
+  },
+  "requirements/Renova_Marketing_Solutions_Final_Website_Content.md": {
+    "mtime": 1781355334.882933,
+    "ast_hash": "7c7e6f2b6338c76f46653d0dfc2d681d",
+    "semantic_hash": ""
+  },
+  "requirements/requirement.md": {
+    "mtime": 1781355274.9801407,
+    "ast_hash": "197247fbd8a20b0293e496a71a81fe07",
+    "semantic_hash": ""
+  },
+  "service-android.html": {
+    "mtime": 1781373877.1983144,
+    "ast_hash": "c78d3d583f3f36e51621d3a877072611",
+    "semantic_hash": ""
+  },
+  "service-ios.html": {
+    "mtime": 1781373970.539853,
+    "ast_hash": "8970234e3f0d9d10f0ceccf9be460f78",
+    "semantic_hash": ""
+  },
+  "service-web-app.html": {
+    "mtime": 1781373781.6011631,
+    "ast_hash": "5bb3e741bd81423a788c93604185e853",
+    "semantic_hash": ""
+  },
+  "service-web-design.html": {
+    "mtime": 1781374033.8233814,
+    "ast_hash": "81dd70b5fe36da62909d8bf445eb6051",
+    "semantic_hash": ""
+  },
+  "services.html": {
+    "mtime": 1781373262.124516,
+    "ast_hash": "917c87787a75d9ae9cd7c54d8a969209",
+    "semantic_hash": ""
+  },
+  "assets/images/logo/favicon.png": {
+    "mtime": 1781354842.4971879,
+    "ast_hash": "d87fefc136ed0fcbd3468a51a346f05a",
+    "semantic_hash": ""
+  },
+  "assets/images/logo/logo.png": {
+    "mtime": 1781295077.1939843,
+    "ast_hash": "3cb61c1bf3dd5004235e62f4b37a03bd",
+    "semantic_hash": ""
+  }
+}

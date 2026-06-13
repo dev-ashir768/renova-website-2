@@ -1,0 +1,611 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "main.js",
+      "file_type": "code",
+      "source_file": "assets/js/main.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "js_main",
+      "community": 1,
+      "norm_label": "main.js"
+    },
+    {
+      "label": "smoothScrollTo()",
+      "file_type": "code",
+      "source_file": "assets/js/main.js",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "js_main_smoothscrollto",
+      "community": 1,
+      "norm_label": "smoothscrollto()"
+    },
+    {
+      "label": "cursorDot",
+      "file_type": "code",
+      "source_file": "assets/js/main.js",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "js_main_cursordot",
+      "community": 1,
+      "norm_label": "cursordot"
+    },
+    {
+      "label": "cursorRing",
+      "file_type": "code",
+      "source_file": "assets/js/main.js",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "js_main_cursorring",
+      "community": 1,
+      "norm_label": "cursorring"
+    },
+    {
+      "label": "navbar",
+      "file_type": "code",
+      "source_file": "assets/js/main.js",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "js_main_navbar",
+      "community": 1,
+      "norm_label": "navbar"
+    },
+    {
+      "label": "sections",
+      "file_type": "code",
+      "source_file": "assets/js/main.js",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "js_main_sections",
+      "community": 1,
+      "norm_label": "sections"
+    },
+    {
+      "label": "navLinks",
+      "file_type": "code",
+      "source_file": "assets/js/main.js",
+      "source_location": "L75",
+      "_origin": "ast",
+      "id": "js_main_navlinks",
+      "community": 1,
+      "norm_label": "navlinks"
+    },
+    {
+      "label": "validate.js",
+      "file_type": "code",
+      "source_file": "assets/js/validate.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "js_validate",
+      "community": 3,
+      "norm_label": "validate.js"
+    },
+    {
+      "label": "Validate",
+      "file_type": "code",
+      "source_file": "assets/js/validate.js",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "js_validate_validate",
+      "community": 3,
+      "norm_label": "validate"
+    },
+    {
+      "label": "CLAUDE.md",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "claude",
+      "community": 2,
+      "norm_label": "claude.md"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "claude_graphify",
+      "community": 2,
+      "norm_label": "graphify"
+    },
+    {
+      "label": "Packages page.md",
+      "file_type": "document",
+      "source_file": "requirements/Packages page.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "requirements_packages_page",
+      "community": 4,
+      "norm_label": "packages page.md"
+    },
+    {
+      "label": "Renova_Marketing_Solutions_Final_Website_Content.md",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content",
+      "community": 0,
+      "norm_label": "renova_marketing_solutions_final_website_content.md"
+    },
+    {
+      "label": "Renova Marketing Solutions",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_renova_marketing_solutions",
+      "community": 0,
+      "norm_label": "renova marketing solutions"
+    },
+    {
+      "label": "**Homepage**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_homepage",
+      "community": 0,
+      "norm_label": "**homepage**"
+    },
+    {
+      "label": "**About Us**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_about_us",
+      "community": 0,
+      "norm_label": "**about us**"
+    },
+    {
+      "label": "**Website Design & Development**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_website_design_development",
+      "community": 0,
+      "norm_label": "**website design & development**"
+    },
+    {
+      "label": "**Web Application Development**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_web_application_development",
+      "community": 0,
+      "norm_label": "**web application development**"
+    },
+    {
+      "label": "**Android App Development**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_android_app_development",
+      "community": 0,
+      "norm_label": "**android app development**"
+    },
+    {
+      "label": "**iOS App Development**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_ios_app_development",
+      "community": 0,
+      "norm_label": "**ios app development**"
+    },
+    {
+      "label": "**SEO Services**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_seo_services",
+      "community": 0,
+      "norm_label": "**seo services**"
+    },
+    {
+      "label": "**Graphic Design & Branding**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L81",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_graphic_design_branding",
+      "community": 0,
+      "norm_label": "**graphic design & branding**"
+    },
+    {
+      "label": "**Social Media Marketing**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L93",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_social_media_marketing",
+      "community": 0,
+      "norm_label": "**social media marketing**"
+    },
+    {
+      "label": "**Product Photography**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L105",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_product_photography",
+      "community": 0,
+      "norm_label": "**product photography**"
+    },
+    {
+      "label": "**Brand & Corporate Photography**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L109",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_brand_corporate_photography",
+      "community": 0,
+      "norm_label": "**brand & corporate photography**"
+    },
+    {
+      "label": "**Video Production & Content Creation**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L113",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_video_production_content_creation",
+      "community": 0,
+      "norm_label": "**video production & content creation**"
+    },
+    {
+      "label": "**Influencer Marketing**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L124",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_influencer_marketing",
+      "community": 0,
+      "norm_label": "**influencer marketing**"
+    },
+    {
+      "label": "**Digital Billboard Advertising**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L135",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_digital_billboard_advertising",
+      "community": 0,
+      "norm_label": "**digital billboard advertising**"
+    },
+    {
+      "label": "**Marketing Strategy & Consulting**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L147",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_marketing_strategy_consulting",
+      "community": 0,
+      "norm_label": "**marketing strategy & consulting**"
+    },
+    {
+      "label": "**Why Choose Renova**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L158",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_why_choose_renova",
+      "community": 0,
+      "norm_label": "**why choose renova**"
+    },
+    {
+      "label": "**Frequently Asked Questions**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L168",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_frequently_asked_questions",
+      "community": 0,
+      "norm_label": "**frequently asked questions**"
+    },
+    {
+      "label": "**Contact Us**",
+      "file_type": "document",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L185",
+      "_origin": "ast",
+      "id": "requirements_renova_marketing_solutions_final_website_content_contact_us",
+      "community": 0,
+      "norm_label": "**contact us**"
+    },
+    {
+      "label": "requirement.md",
+      "file_type": "document",
+      "source_file": "requirements/requirement.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "requirements_requirement",
+      "community": 5,
+      "norm_label": "requirement.md"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assets/js/main.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "js_main",
+      "target": "js_main_cursordot",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assets/js/main.js",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "js_main",
+      "target": "js_main_cursorring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assets/js/main.js",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "js_main",
+      "target": "js_main_navbar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assets/js/main.js",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "js_main",
+      "target": "js_main_navlinks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assets/js/main.js",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "js_main",
+      "target": "js_main_sections",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assets/js/main.js",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "js_main",
+      "target": "js_main_smoothscrollto",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assets/js/validate.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "js_validate",
+      "target": "js_validate_validate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "claude",
+      "target": "claude_graphify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_about_us",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_android_app_development",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_brand_corporate_photography",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L185",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_contact_us",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L135",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_digital_billboard_advertising",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L168",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_frequently_asked_questions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L81",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_graphic_design_branding",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_homepage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L124",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_influencer_marketing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_ios_app_development",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L147",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_marketing_strategy_consulting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L105",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_product_photography",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_renova_marketing_solutions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_seo_services",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_social_media_marketing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L113",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_video_production_content_creation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_web_application_development",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_website_design_development",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "requirements/Renova_Marketing_Solutions_Final_Website_Content.md",
+      "source_location": "L158",
+      "weight": 1.0,
+      "source": "requirements_renova_marketing_solutions_final_website_content",
+      "target": "requirements_renova_marketing_solutions_final_website_content_why_choose_renova",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "45c7eea90c18d318a89b7450bae1f3387dafc856"
+}

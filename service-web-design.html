@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Design & Development — Renova Marketing Solutions</title>
+    <link rel="icon" type="image/png" href="assets/images/logo/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gold: "#b8922a",
+              "gold-light": "#d4a93a",
+              "gold-dark": "#8a6b1e",
+              cream: "#fafaf8",
+              "off-white": "#f5f4f0",
+              "mid-gray": "#e0dfd9",
+              "text-main": "#111110",
+              "text-sub": "#5a5a55",
+              "text-muted": "#9a9a94",
+            },
+            fontFamily: { sans: ["Inter", "system-ui", "sans-serif"] },
+          },
+        },
+      };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+      .hero-bg {
+        background: #fafaf8;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(184, 146, 42, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(184, 146, 42, 0.045) 1px, transparent 1px);
+        background-size: 80px 80px;
+      }
+      .hero-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 80% 55% at 50% 0%,
+          rgba(212, 169, 58, 0.09) 0%,
+          transparent 70%
+        );
+      }
+      .feat-card {
+        background: #fff;
+        border: 1px solid #e8e7e2;
+        border-radius: 2px;
+        padding: 28px;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s,
+          transform 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .feat-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #b8922a, #d4a93a);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s;
+      }
+      .feat-card:hover::after {
+        transform: scaleX(1);
+      }
+      .feat-card:hover {
+        border-color: rgba(184, 146, 42, 0.35);
+        box-shadow: 0 8px 30px rgba(184, 146, 42, 0.1);
+        transform: translateY(-4px);
+      }
+      .step-num {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #b8922a, #d4a93a);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 900;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .sub-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #b8922a;
+        flex-shrink: 0;
+        display: inline-block;
+      }
+      .faq-item {
+        border-bottom: 1px solid #e8e7e2;
+        cursor: pointer;
+      }
+      .faq-answer {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="bg-cream text-text-main font-sans">
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 px-6 lg:px-12">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <a href="index.html"
+          ><img
+            src="assets/images/logo/logo.png"
+            alt="Renova"
+            class="h-10 w-auto object-contain"
+        /></a>
+        <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
+          <li>
+            <a href="services.html" class="text-gold font-semibold">Services</a>
+          </li>
+          <li>
+            <a
+              href="packages.html"
+              class="text-text-sub hover:text-text-main transition-colors"
+              >Packages</a
+            >
+          </li>
+          <li>
+            <a
+              href="index.html#portfolio"
+              class="text-text-sub hover:text-text-main transition-colors"
+              >Portfolio</a
+            >
+          </li>
+          <li>
+            <a
+              href="about.html"
+              class="text-text-sub hover:text-text-main transition-colors"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="contact.html"
+              class="btn-gold px-5 py-2.5 rounded-sm text-sm text-white"
+              >Get Started</a
+            >
+          </li>
+        </ul>
+        <button id="hamburger" class="lg:hidden p-2" aria-label="Menu">
+          <span class="block w-6 h-0.5 bg-text-main mb-1.5"></span
+          ><span class="block w-6 h-0.5 bg-text-main mb-1.5"></span
+          ><span class="block w-4 h-0.5 bg-text-main"></span>
+        </button>
+      </div>
+      <div
+        id="mobile-menu"
+        class="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-lg"
+        style="display: none"
+      >
+        <ul class="flex flex-col py-3 px-6">
+          <li>
+            <a
+              href="services.html"
+              class="block py-3 text-sm font-semibold text-gold border-b border-gray-50"
+              >Services</a
+            >
+          </li>
+          <li>
+            <a
+              href="packages.html"
+              class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50"
+              >Packages</a
+            >
+          </li>
+          <li>
+            <a
+              href="index.html#portfolio"
+              class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50"
+              >Portfolio</a
+            >
+          </li>
+          <li>
+            <a
+              href="about.html"
+              class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50"
+              >About</a
+            >
+          </li>
+          <li class="pt-3">
+            <a
+              href="contact.html"
+              class="btn-gold block text-center py-3 rounded-sm text-sm text-white"
+              >Get Started</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-bg pt-40 pb-20 px-6 lg:px-12">
+      <div class="max-w-5xl mx-auto relative z-10">
+        <div
+          id="h-breadcrumb"
+          class="flex items-center gap-2 text-xs text-text-muted mb-6"
+        >
+          <a href="services.html" class="hover:text-gold transition-colors"
+            >Services</a
+          >
+          <span>/</span
+          ><span class="text-text-sub">Website Design &amp; Development</span>
+        </div>
+        <div
+          id="h-badge"
+          class="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full border border-gold/20 bg-gold/5"
+        >
+          <span
+            class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse inline-block"
+          ></span>
+          <span
+            class="text-xs tracking-widest uppercase text-gold font-semibold"
+            >Technology</span
+          >
+        </div>
+        <h1
+          id="h-title"
+          class="text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-5"
+        >
+          Website Design<br />&amp; <span class="gold-text">Development</span>
+        </h1>
+        <p
+          id="h-sub"
+          class="text-text-sub text-lg max-w-2xl leading-relaxed mb-8"
+        >
+          Modern, responsive, and high-converting websites that help businesses
+          establish credibility and generate results. Every website we build is
+          crafted for performance, SEO, and user experience.
+        </p>
+        <div id="h-cta" class="flex flex-wrap gap-4">
+          <a
+            href="contact.html"
+            class="btn-gold px-8 py-4 rounded-sm text-sm uppercase tracking-widest text-white"
+            >Get a Free Quote</a
+          >
+          <a
+            href="packages.html"
+            class="btn-outline px-8 py-4 rounded-sm text-sm uppercase tracking-widest"
+            >View Packages</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT WE BUILD -->
+    <section class="py-20 px-6 lg:px-12 bg-off-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12 reveal">
+          <div
+            class="text-xs uppercase tracking-widest text-gold font-semibold mb-2"
+          >
+            What We Build
+          </div>
+          <h2 class="text-3xl lg:text-4xl font-black text-text-main">
+            Website Types We Specialize In
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">
+              Business Websites
+            </h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              Professional multi-page websites that position your business as a
+              trusted authority in your market.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">
+              Corporate Websites
+            </h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              Enterprise-grade websites for corporations that demand premium
+              design, scalability, and performance.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">
+              E-Commerce Stores
+            </h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              Fully functional online stores with secure payments, product
+              management, and conversion optimization.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">
+              Landing Pages
+            </h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              High-converting single-page designs built around one goal —
+              turning visitors into leads or customers.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">
+              Website Redesigns
+            </h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              Modernize your existing website with updated design, improved
+              performance, and better user experience.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">
+              Maintenance &amp; Support
+            </h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              Ongoing website maintenance, updates, backups, and technical
+              support to keep your site running smoothly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="py-20 px-6 lg:px-12 bg-cream">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12 reveal">
+          <div
+            class="text-xs uppercase tracking-widest text-gold font-semibold mb-2"
+          >
+            How We Work
+          </div>
+          <h2 class="text-3xl lg:text-4xl font-black text-text-main">
+            Our Development Process
+          </h2>
+        </div>
+        <div class="space-y-8">
+          <div class="flex gap-6 items-start reveal">
+            <div class="step-num">1</div>
+            <div>
+              <h3 class="text-base font-black text-text-main mb-1">
+                Discovery &amp; Strategy
+              </h3>
+              <p class="text-xs text-text-sub leading-relaxed">
+                We start by learning your business, audience, and goals. We
+                research competitors and define the website's structure, content
+                strategy, and conversion goals before a single pixel is
+                designed.
+              </p>
+            </div>
+          </div>
+          <div class="gold-divider reveal"></div>
+          <div class="flex gap-6 items-start reveal">
+            <div class="step-num">2</div>
+            <div>
+              <h3 class="text-base font-black text-text-main mb-1">
+                Design &amp; Prototyping
+              </h3>
+              <p class="text-xs text-text-sub leading-relaxed">
+                Our designers create custom UI mockups tailored to your brand.
+                You review and approve every page design before we write a
+                single line of code — no surprises.
+              </p>
+            </div>
+          </div>
+          <div class="gold-divider reveal"></div>
+          <div class="flex gap-6 items-start reveal">
+            <div class="step-num">3</div>
+            <div>
+              <h3 class="text-base font-black text-text-main mb-1">
+                Development
+              </h3>
+              <p class="text-xs text-text-sub leading-relaxed">
+                We build your website using clean, optimized code. Fully
+                responsive across all devices, fast-loading, and built with SEO
+                best practices baked in from the start.
+              </p>
+            </div>
+          </div>
+          <div class="gold-divider reveal"></div>
+          <div class="flex gap-6 items-start reveal">
+            <div class="step-num">4</div>
+            <div>
+              <h3 class="text-base font-black text-text-main mb-1">
+                Testing &amp; QA
+              </h3>
+              <p class="text-xs text-text-sub leading-relaxed">
+                We test across all major browsers and devices — Chrome, Safari,
+                Firefox, mobile, tablet. We also run performance checks using
+                Google Lighthouse before launch.
+              </p>
+            </div>
+          </div>
+          <div class="gold-divider reveal"></div>
+          <div class="flex gap-6 items-start reveal">
+            <div class="step-num">5</div>
+            <div>
+              <h3 class="text-base font-black text-text-main mb-1">
+                Launch &amp; Support
+              </h3>
+              <p class="text-xs text-text-sub leading-relaxed">
+                We handle the full deployment and go-live process. Every project
+                includes 1 month of free post-launch support — so you're never
+                left on your own.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY RENOVA -->
+    <section class="py-20 px-6 lg:px-12 bg-off-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12 reveal">
+          <div
+            class="text-xs uppercase tracking-widest text-gold font-semibold mb-2"
+          >
+            Why Choose Us
+          </div>
+          <h2 class="text-3xl lg:text-4xl font-black text-text-main">
+            What Sets Our Websites Apart
+          </h2>
+        </div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="text-center reveal">
+            <div class="text-4xl font-black gold-text mb-1">100%</div>
+            <div
+              class="text-xs text-text-sub font-semibold uppercase tracking-widest"
+            >
+              Custom Design
+            </div>
+          </div>
+          <div class="text-center reveal">
+            <div class="text-4xl font-black gold-text mb-1">5-7</div>
+            <div
+              class="text-xs text-text-sub font-semibold uppercase tracking-widest"
+            >
+              Day Delivery
+            </div>
+          </div>
+          <div class="text-center reveal">
+            <div class="text-4xl font-black gold-text mb-1">All</div>
+            <div
+              class="text-xs text-text-sub font-semibold uppercase tracking-widest"
+            >
+              Devices Tested
+            </div>
+          </div>
+          <div class="text-center reveal">
+            <div class="text-4xl font-black gold-text mb-1">SEO</div>
+            <div
+              class="text-xs text-text-sub font-semibold uppercase tracking-widest"
+            >
+              Built-in From Day 1
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 px-6 lg:px-12 bg-cream">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-10 reveal">
+          <div
+            class="text-xs uppercase tracking-widest text-gold font-semibold mb-2"
+          >
+            FAQ
+          </div>
+          <h2 class="text-3xl font-black text-text-main">Common Questions</h2>
+        </div>
+        <div class="space-y-0 reveal">
+          <div class="faq-item py-5">
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-bold text-text-main"
+                >How long does a website take to build?</span
+              ><span class="text-gold font-bold text-lg faq-icon">+</span>
+            </div>
+            <div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">
+              Most websites are completed in 5–14 business days depending on
+              complexity. Simple landing pages can be done in as little as 3–5
+              days, while multi-page e-commerce sites typically take 10–20 days.
+            </div>
+          </div>
+          <div class="faq-item py-5">
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-bold text-text-main"
+                >Do you build websites on WordPress or custom code?</span
+              ><span class="text-gold font-bold text-lg faq-icon">+</span>
+            </div>
+            <div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">
+              We work with both — WordPress/CMS for content-heavy sites that
+              need easy self-management, and custom-coded solutions for maximum
+              performance and full design freedom. We'll recommend the best
+              approach for your project.
+            </div>
+          </div>
+          <div class="faq-item py-5">
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-bold text-text-main"
+                >Will my website be mobile-friendly?</span
+              ><span class="text-gold font-bold text-lg faq-icon">+</span>
+            </div>
+            <div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">
+              Absolutely. Every website we build is fully responsive and tested
+              across mobile, tablet, and desktop. With over 60% of web traffic
+              coming from mobile, this is non-negotiable for us.
+            </div>
+          </div>
+          <div class="faq-item py-5">
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-bold text-text-main"
+                >Do you offer hosting and domain setup?</span
+              ><span class="text-gold font-bold text-lg faq-icon">+</span>
+            </div>
+            <div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">
+              Yes. We can assist with domain registration, hosting setup, and
+              SSL certificates. We work with all major hosting providers and can
+              recommend the best option for your budget and traffic needs.
+            </div>
+          </div>
+          <div class="faq-item py-5">
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-bold text-text-main"
+                >What do you need from me to get started?</span
+              ><span class="text-gold font-bold text-lg faq-icon">+</span>
+            </div>
+            <div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">
+              We'll need your brand assets (logo, colors, fonts if available),
+              content (text and images, or we can help with that), and examples
+              of websites you like. We'll guide you through the rest in our
+              kickoff call.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section
+      class="py-20 px-6 lg:px-12"
+      style="
+        background: linear-gradient(
+          135deg,
+          #111110 0%,
+          #1a1a18 60%,
+          #111110 100%
+        );
+      "
+    >
+      <div class="max-w-3xl mx-auto text-center reveal">
+        <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">
+          Ready to Build Your <span class="gold-text">Dream Website?</span>
+        </h2>
+        <p class="text-gray-400 text-sm leading-relaxed mb-8 max-w-xl mx-auto">
+          Tell us about your project and we'll put together a tailored proposal
+          — completely free, no strings attached.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="contact.html"
+            class="btn-gold px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-bold text-white"
+            >Get a Free Quote</a
+          >
+          <a
+            href="packages.html"
+            class="inline-block px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-semibold text-white border border-white/20 hover:border-gold/50 hover:text-gold transition-all duration-200"
+            >See Pricing</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 px-6 lg:px-12 border-t border-mid-gray bg-off-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+          <div class="md:col-span-2">
+            <a href="index.html" class="inline-block mb-4"
+              ><img
+                src="assets/images/logo/logo.png"
+                alt="Renova"
+                class="h-9 w-auto object-contain"
+            /></a>
+            <p class="text-text-sub text-sm leading-relaxed max-w-xs">
+              A full-service marketing and technology agency helping businesses
+              build stronger brands across the USA and Canada.
+            </p>
+          </div>
+          <div>
+            <div
+              class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4"
+            >
+              Services
+            </div>
+            <ul class="space-y-2">
+              <li>
+                <a href="service-web-design.html" class="text-xs text-gold"
+                  >Website Development</a
+                >
+              </li>
+              <li>
+                <a
+                  href="service-web-app.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >Web Applications</a
+                >
+              </li>
+              <li>
+                <a
+                  href="service-android.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >Android Apps</a
+                >
+              </li>
+              <li>
+                <a
+                  href="service-ios.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >iOS Apps</a
+                >
+              </li>
+              <li>
+                <a
+                  href="service-seo.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >SEO Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="service-branding.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >Branding &amp; Design</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div
+              class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4"
+            >
+              Company
+            </div>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="about.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="packages.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >Packages</a
+                >
+              </li>
+              <li>
+                <a
+                  href="contact.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >Contact Us</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="gold-divider mb-6"></div>
+        <div
+          class="flex flex-col sm:flex-row items-center justify-between gap-3"
+        >
+          <p class="text-xs text-text-muted">
+            &copy; 2025 Renova Marketing Solutions. All rights reserved.
+          </p>
+          <p class="text-xs text-text-muted">USA &amp; Canada</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+      (function () {
+        const dot = document.createElement("div"),
+          ring = document.createElement("div");
+        dot.id = "cursor-dot";
+        ring.id = "cursor-ring";
+        Object.assign(dot.style, {
+          position: "fixed",
+          width: "6px",
+          height: "6px",
+          borderRadius: "50%",
+          background: "#b8922a",
+          pointerEvents: "none",
+          zIndex: "9999",
+          transform: "translate(-50%,-50%)",
+          top: "0",
+          left: "0",
+        });
+        Object.assign(ring.style, {
+          position: "fixed",
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          border: "1.5px solid rgba(184,146,42,0.5)",
+          pointerEvents: "none",
+          zIndex: "9998",
+          transform: "translate(-50%,-50%)",
+          top: "0",
+          left: "0",
+          transition: "width .3s,height .3s,border-color .3s",
+        });
+        document.body.appendChild(dot);
+        document.body.appendChild(ring);
+        let mx = 0,
+          my = 0,
+          rx = 0,
+          ry = 0;
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+          gsap.set(dot, { x: mx, y: my });
+        });
+        (function loop() {
+          rx += (mx - rx) * 0.1;
+          ry += (my - ry) * 0.1;
+          gsap.set(ring, { x: rx, y: ry });
+          requestAnimationFrame(loop);
+        })();
+        document.querySelectorAll("a,button,.feat-card").forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            ring.style.width = "52px";
+            ring.style.height = "52px";
+            ring.style.borderColor = "rgba(184,146,42,0.9)";
+          });
+          el.addEventListener("mouseleave", () => {
+            ring.style.width = "32px";
+            ring.style.height = "32px";
+            ring.style.borderColor = "rgba(184,146,42,0.5)";
+          });
+        });
+      })();
+      const navbar = document.getElementById("navbar");
+      window.addEventListener(
+        "scroll",
+        () => navbar.classList.toggle("nav-scrolled", window.scrollY > 60),
+        { passive: true },
+      );
+      document.getElementById("hamburger").addEventListener("click", (e) => {
+        e.stopPropagation();
+        const m = document.getElementById("mobile-menu");
+        m.style.display = m.style.display === "block" ? "none" : "block";
+      });
+      document.addEventListener("click", (e) => {
+        if (!navbar.contains(e.target))
+          document.getElementById("mobile-menu").style.display = "none";
+      });
+      gsap.set(["#h-badge", "#h-title", "#h-sub", "#h-cta"], {
+        opacity: 0,
+        y: 28,
+      });
+      gsap
+        .timeline({ delay: 0.1, defaults: { ease: "expo.out" } })
+        .to("#h-badge", { opacity: 1, y: 0, duration: 0.7 })
+        .to("#h-title", { opacity: 1, y: 0, duration: 0.9 }, "-=.4")
+        .to("#h-sub", { opacity: 1, y: 0, duration: 0.75 }, "-=.5")
+        .to("#h-cta", { opacity: 1, y: 0, duration: 0.65 }, "-=.4");
+      gsap.utils.toArray(".reveal").forEach((el, i) => {
+        gsap.set(el, { opacity: 0, y: 30 });
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 90%",
+          once: true,
+          onEnter: () =>
+            gsap.to(el, {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              delay: (i % 4) * 0.06,
+              ease: "expo.out",
+            }),
+        });
+      });
+      gsap.utils.toArray(".gold-divider").forEach((el) => {
+        gsap.set(el, { scaleX: 0, transformOrigin: "left center" });
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 93%",
+          once: true,
+          onEnter: () =>
+            gsap.to(el, { scaleX: 1, duration: 1, ease: "expo.out" }),
+        });
+      });
+      document.querySelectorAll(".btn-gold,.btn-outline").forEach((btn) => {
+        btn.addEventListener("mousemove", (e) => {
+          const r = btn.getBoundingClientRect();
+          gsap.to(btn, {
+            x: (e.clientX - r.left - r.width / 2) * 0.22,
+            y: (e.clientY - r.top - r.height / 2) * 0.18,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        });
+        btn.addEventListener("mouseleave", () =>
+          gsap.to(btn, {
+            x: 0,
+            y: 0,
+            duration: 0.6,
+            ease: "elastic.out(1,.5)",
+          }),
+        );
+      });
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          const ans = item.querySelector(".faq-answer"),
+            icon = item.querySelector(".faq-icon");
+          const open = ans.style.display === "block";
+          ans.style.display = open ? "none" : "block";
+          icon.textContent = open ? "+" : "−";
+        });
+      });
+      gsap.from("footer", {
+        opacity: 0,
+        y: 24,
+        duration: 0.9,
+        ease: "expo.out",
+        scrollTrigger: { trigger: "footer", start: "top 95%", once: true },
+      });
+    </script>
+  open graphify-out/graph.html</body>
+</html>
