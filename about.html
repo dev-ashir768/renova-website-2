@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Renova Marketing Solutions</title>
+  <link rel="icon" type="image/png" href="assets/images/logo/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold:'#b8922a','gold-light':'#d4a93a','gold-dark':'#8a6b1e',
+            cream:'#fafaf8','off-white':'#f5f4f0','mid-gray':'#e0dfd9',
+            'text-main':'#111110','text-sub':'#5a5a55','text-muted':'#9a9a94',
+          },
+          fontFamily:{ sans:['Inter','system-ui','sans-serif'] },
+        }
+      }
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    /* ── Hero ── */
+    .about-hero { background:#fafaf8; position:relative; overflow:hidden; }
+    .about-hero::before {
+      content:''; position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(184,146,42,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184,146,42,0.045) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .about-hero::after {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse 80% 55% at 50% 0%, rgba(212,169,58,0.09) 0%, transparent 70%);
+    }
+
+    /* ── Stat counter ── */
+    .stat-card {
+      background:#fff; border:1px solid #e8e7e2;
+      transition: border-color .3s, box-shadow .3s, transform .3s;
+      position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, #b8922a, #d4a93a, #8a6b1e);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s ease;
+    }
+    .stat-card:hover::before { transform: scaleX(1); }
+    .stat-card:hover {
+      border-color: rgba(184,146,42,.35);
+      box-shadow: 0 8px 32px rgba(184,146,42,.1);
+      transform: translateY(-4px);
+    }
+
+    /* ── Mission/Vision cards ── */
+    .mv-card {
+      background:#fff; border:1px solid #e8e7e2;
+      transition: border-color .3s, box-shadow .3s;
+      position: relative; overflow: hidden;
+    }
+    .mv-card:hover {
+      border-color: rgba(184,146,42,.3);
+      box-shadow: 0 6px 28px rgba(184,146,42,.09);
+    }
+
+    /* ── Value card ── */
+    .value-card {
+      background:#fff; border:1px solid #e8e7e2;
+      transition: border-color .3s, box-shadow .3s, transform .3s;
+    }
+    .value-card:hover {
+      border-color: rgba(184,146,42,.3);
+      box-shadow: 0 4px 20px rgba(184,146,42,.08);
+      transform: translateY(-3px);
+    }
+
+    /* ── Service capability row ── */
+    .cap-item {
+      display:flex; align-items:center; gap:10px;
+      padding: 12px 16px;
+      background:#fff; border:1px solid #e8e7e2; border-radius:2px;
+      font-size:13px; color:#5a5a55; font-weight:500;
+      transition: border-color .2s, background .2s;
+    }
+    .cap-item:hover {
+      border-color: rgba(184,146,42,.3);
+      background: rgba(184,146,42,.03);
+      color:#111110;
+    }
+    .cap-dot { width:6px; height:6px; border-radius:50%; background:#b8922a; flex-shrink:0; }
+
+    /* ── Timeline ── */
+    .timeline-line {
+      position:absolute; left:20px; top:0; bottom:0; width:1px;
+      background: linear-gradient(180deg, #b8922a 0%, rgba(184,146,42,.15) 100%);
+    }
+    .timeline-dot {
+      width:40px; height:40px; border-radius:50%; flex-shrink:0;
+      background:linear-gradient(135deg,#b8922a,#d4a93a);
+      display:flex; align-items:center; justify-content:center;
+      font-size:12px; font-weight:800; color:#fff;
+      position:relative; z-index:1;
+    }
+
+    /* ── Why card ── */
+    .why-strip {
+      background:#fff; border:1px solid #e8e7e2;
+      transition: border-color .25s, box-shadow .25s, transform .25s;
+    }
+    .why-strip:hover {
+      border-color: rgba(184,146,42,.35);
+      box-shadow: 0 4px 24px rgba(184,146,42,.09);
+      transform: translateX(4px);
+    }
+
+    /* ── Coverage strip ── */
+    .coverage-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 16px; border-radius:2px;
+      border:1px solid rgba(184,146,42,.2);
+      background:rgba(184,146,42,.05);
+      font-size:12px; font-weight:600; color:#b8922a;
+      text-transform:uppercase; letter-spacing:.07em;
+    }
+  </style>
+</head>
+<body class="bg-cream text-text-main font-sans">
+
+<!-- ════════ NAVBAR ════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center">
+      <img src="assets/images/logo/logo.png" alt="Renova Marketing Solutions" class="h-10 w-auto object-contain" />
+    </a>
+    <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
+      <li><a href="index.html#services"  class="text-text-sub hover:text-text-main transition-colors">Services</a></li>
+      <li><a href="packages.html"        class="text-text-sub hover:text-text-main transition-colors">Packages</a></li>
+      <li><a href="index.html#portfolio" class="text-text-sub hover:text-text-main transition-colors">Portfolio</a></li>
+      <li><a href="about.html"           class="text-gold font-semibold">About</a></li>
+      <li><a href="contact.html"         class="btn-gold px-5 py-2.5 rounded-sm text-sm text-white">Get Started</a></li>
+    </ul>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+      <span class="block w-6 h-0.5 bg-text-main"></span>
+      <span class="block w-6 h-0.5 bg-text-main"></span>
+      <span class="block w-4 h-0.5 bg-text-main"></span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-lg" style="display:none;">
+    <ul class="flex flex-col py-3 px-6">
+      <li><a href="index.html#services"  class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50">Services</a></li>
+      <li><a href="packages.html"        class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50">Packages</a></li>
+      <li><a href="index.html#portfolio" class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50">Portfolio</a></li>
+      <li><a href="about.html"           class="block py-3 text-sm font-semibold text-gold border-b border-gray-50">About</a></li>
+      <li class="pt-3"><a href="contact.html" class="btn-gold block text-center py-3 rounded-sm text-sm text-white">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- ════════ HERO ════════ -->
+<section class="about-hero pt-40 pb-20 px-6 lg:px-12">
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <div id="a-badge" class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-gold/20 bg-gold/5">
+          <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse inline-block"></span>
+          <span class="text-xs tracking-widest uppercase text-gold font-semibold">Full-Service Agency</span>
+        </div>
+        <h1 id="a-title" class="text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-6">
+          We Build Brands<br/>That <span class="gold-text">Drive Growth</span>
+        </h1>
+        <p id="a-sub" class="text-text-sub text-lg leading-relaxed mb-8 max-w-lg">
+          At Renova Marketing Solutions, we combine creativity, technology, and strategic marketing to help businesses succeed in a competitive digital landscape.
+        </p>
+        <div id="a-cta" class="flex flex-wrap gap-4">
+          <a href="contact.html"  class="btn-gold px-8 py-4 rounded-sm text-sm uppercase tracking-widest text-white">Start a Project</a>
+          <a href="packages.html" class="btn-outline px-8 py-4 rounded-sm text-sm uppercase tracking-widest">View Packages</a>
+        </div>
+      </div>
+
+      <!-- Right: big quote / tagline card -->
+      <div id="a-card" class="relative">
+        <div class="bg-white border border-mid-gray rounded-sm p-10 relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-1 h-full" style="background:linear-gradient(180deg,#b8922a,#d4a93a,#8a6b1e);"></div>
+          <div class="text-5xl text-gold font-black leading-none mb-5 opacity-25">"</div>
+          <p class="text-xl font-bold text-text-main leading-relaxed mb-6">
+            Creative Solutions.<br/>Measurable Results.<br/>Lasting Growth.
+          </p>
+          <p class="text-sm text-text-sub leading-relaxed">
+            Whether you're a startup, small business, or established company — we create customized strategies designed around your specific goals.
+          </p>
+          <div class="mt-8 pt-6 border-t border-mid-gray flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,#b8922a,#d4a93a);">
+              <img src="assets/images/logo/favicon.png" alt="" class="w-6 h-6 object-contain" />
+            </div>
+            <div>
+              <div class="text-xs font-bold text-text-main">Renova Marketing Solutions</div>
+              <div class="text-xs text-text-muted">USA &amp; Canada</div>
+            </div>
+          </div>
+        </div>
+        <!-- Decorative floater -->
+        <div class="absolute -bottom-4 -right-4 w-24 h-24 rounded-sm border border-gold/15 bg-gold/4 -z-10"></div>
+        <div class="absolute -top-4 -left-4 w-16 h-16 rounded-sm border border-gold/10 bg-gold/3 -z-10"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ STATS ════════ -->
+<section class="py-16 px-6 lg:px-12 bg-off-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="stat-card reveal rounded-sm p-7 text-center">
+        <div class="text-3xl font-black gold-text mb-1">USA &amp; CA</div>
+        <div class="text-xs uppercase tracking-widest text-text-muted font-semibold">Coverage</div>
+      </div>
+      <div class="stat-card reveal rounded-sm p-7 text-center">
+        <div class="text-3xl font-black gold-text mb-1">7+</div>
+        <div class="text-xs uppercase tracking-widest text-text-muted font-semibold">Core Services</div>
+      </div>
+      <div class="stat-card reveal rounded-sm p-7 text-center">
+        <div class="text-3xl font-black gold-text mb-1">100%</div>
+        <div class="text-xs uppercase tracking-widest text-text-muted font-semibold">Tailored Strategies</div>
+      </div>
+      <div class="stat-card reveal rounded-sm p-7 text-center">
+        <div class="text-3xl font-black gold-text mb-1">24hr</div>
+        <div class="text-xs uppercase tracking-widest text-text-muted font-semibold">Response Time</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ MISSION & VISION ════════ -->
+<section class="py-20 px-6 lg:px-12 bg-cream">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <div class="mv-card reveal rounded-sm p-10">
+        <div class="w-12 h-12 rounded-sm icon-box flex items-center justify-center mb-6">
+          <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.964-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+        <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-3">Our Mission</div>
+        <h3 class="text-2xl font-black text-text-main mb-4 leading-tight">Providing Innovative Solutions That Drive Real Results</h3>
+        <p class="text-text-sub text-sm leading-relaxed">
+          Our mission is to provide businesses with innovative solutions that increase visibility, generate leads, improve customer engagement, and accelerate growth. We don't believe in one-size-fits-all — every strategy we build is designed around your unique goals and market.
+        </p>
+      </div>
+
+      <div class="mv-card reveal rounded-sm p-10">
+        <div class="w-12 h-12 rounded-sm icon-box flex items-center justify-center mb-6">
+          <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+          </svg>
+        </div>
+        <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-3">Our Vision</div>
+        <h3 class="text-2xl font-black text-text-main mb-4 leading-tight">Becoming the Partner Businesses Trust to Grow</h3>
+        <p class="text-text-sub text-sm leading-relaxed">
+          We envision a world where every business — regardless of size — has access to premium marketing and technology solutions. Our goal is to be the long-term growth partner for businesses across North America, delivering measurable impact through creativity and strategy.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ OUR STORY ════════ -->
+<section class="py-20 px-6 lg:px-12 bg-off-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+      <div class="reveal">
+        <div class="inline-flex items-center gap-2 mb-5">
+          <div class="w-6 h-px bg-gold opacity-60"></div>
+          <span class="text-xs uppercase tracking-widest text-gold font-semibold">Our Story</span>
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-black text-text-main mb-6 leading-tight">
+          Built to Help Businesses <span class="gold-text">Thrive</span>
+        </h2>
+        <div class="space-y-4 text-sm text-text-sub leading-relaxed">
+          <p>Renova Marketing Solutions was founded with a single purpose: to bridge the gap between great businesses and the audiences they deserve to reach.</p>
+          <p>We saw too many talented entrepreneurs and business owners being held back by fragmented, unreliable, or overpriced marketing support. So we built a full-service agency that does it all — from building your website to managing your brand's digital presence, running influencer campaigns, and even placing ads on digital billboards across North America.</p>
+          <p>Today, we serve clients across the United States and Canada, combining a creative team with technical expertise and a results-first mindset. Every project we take on gets the same level of care, strategy, and execution — whether it's a local startup or an established corporation.</p>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="coverage-badge"><span class="w-2 h-2 rounded-full bg-gold inline-block"></span>United States</span>
+          <span class="coverage-badge"><span class="w-2 h-2 rounded-full bg-gold inline-block"></span>Canada</span>
+          <span class="coverage-badge"><span class="w-2 h-2 rounded-full bg-gold inline-block"></span>Remote-First</span>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="relative pl-14">
+        <div class="timeline-line"></div>
+
+        <div class="reveal space-y-10">
+          <div class="flex gap-5 items-start">
+            <div class="timeline-dot">1</div>
+            <div class="pt-1">
+              <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-1">The Beginning</div>
+              <h4 class="text-base font-black text-text-main mb-1">Founded with a Vision</h4>
+              <p class="text-xs text-text-sub leading-relaxed">Renova was born from the desire to give businesses access to premium, full-service marketing and technology support under one roof.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-5 items-start">
+            <div class="timeline-dot">2</div>
+            <div class="pt-1">
+              <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-1">Expanding Services</div>
+              <h4 class="text-base font-black text-text-main mb-1">Beyond Websites</h4>
+              <p class="text-xs text-text-sub leading-relaxed">We grew from web design into a complete agency — adding branding, SEO, mobile apps, social media management, and influencer marketing.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-5 items-start">
+            <div class="timeline-dot">3</div>
+            <div class="pt-1">
+              <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-1">North America</div>
+              <h4 class="text-base font-black text-text-main mb-1">Cross-Border Coverage</h4>
+              <p class="text-xs text-text-sub leading-relaxed">We established our network of Canadian influencers and digital billboard placements across major US and Canadian cities.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-5 items-start">
+            <div class="timeline-dot">4</div>
+            <div class="pt-1">
+              <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-1">Today &amp; Beyond</div>
+              <h4 class="text-base font-black text-text-main mb-1">Full-Service Growth Partner</h4>
+              <p class="text-xs text-text-sub leading-relaxed">Today Renova is a trusted growth partner for startups, SMBs, and established brands — delivering creative solutions with measurable results.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ CORE VALUES ════════ -->
+<section class="py-20 px-6 lg:px-12 bg-cream">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <div class="inline-flex items-center gap-2 mb-4">
+        <div class="w-6 h-px bg-gold opacity-60"></div>
+        <span class="text-xs uppercase tracking-widest text-gold font-semibold">What Drives Us</span>
+        <div class="w-6 h-px bg-gold opacity-60"></div>
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main">Our Core <span class="gold-text">Values</span></h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <div class="value-card reveal rounded-sm p-7">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+        </div>
+        <h4 class="text-base font-black text-text-main mb-2">Creativity First</h4>
+        <p class="text-xs text-text-sub leading-relaxed">We approach every project with fresh ideas. Standing out in a crowded market requires bold, original thinking — and that's exactly what we bring.</p>
+      </div>
+
+      <div class="value-card reveal rounded-sm p-7">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+        </div>
+        <h4 class="text-base font-black text-text-main mb-2">Results-Focused</h4>
+        <p class="text-xs text-text-sub leading-relaxed">We measure success by your outcomes, not vanity metrics. Every strategy we deploy is built to generate real, trackable business impact.</p>
+      </div>
+
+      <div class="value-card reveal rounded-sm p-7">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
+        </div>
+        <h4 class="text-base font-black text-text-main mb-2">Transparent Communication</h4>
+        <p class="text-xs text-text-sub leading-relaxed">No jargon, no hidden fees. We keep you informed at every stage of the project with clear updates and honest conversations.</p>
+      </div>
+
+      <div class="value-card reveal rounded-sm p-7">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+        </div>
+        <h4 class="text-base font-black text-text-main mb-2">Quality Assurance</h4>
+        <p class="text-xs text-text-sub leading-relaxed">We hold ourselves to the highest standard. Every deliverable — from a logo to a full web application — goes through rigorous quality review before delivery.</p>
+      </div>
+
+      <div class="value-card reveal rounded-sm p-7">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+        </div>
+        <h4 class="text-base font-black text-text-main mb-2">Client-Centric</h4>
+        <p class="text-xs text-text-sub leading-relaxed">Your goals are our goals. We assign a dedicated project manager to every client so you always have a single point of contact who knows your business inside out.</p>
+      </div>
+
+      <div class="value-card reveal rounded-sm p-7">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+        </div>
+        <h4 class="text-base font-black text-text-main mb-2">Innovation-Driven</h4>
+        <p class="text-xs text-text-sub leading-relaxed">We stay ahead of trends in technology and marketing so our clients always benefit from the most effective, up-to-date strategies available.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ WHY CHOOSE RENOVA ════════ -->
+<section class="py-20 px-6 lg:px-12 bg-off-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <div class="reveal">
+        <div class="inline-flex items-center gap-2 mb-5">
+          <div class="w-6 h-px bg-gold opacity-60"></div>
+          <span class="text-xs uppercase tracking-widest text-gold font-semibold">Why Choose Us</span>
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-black text-text-main mb-4 leading-tight">
+          Everything Your Business Needs, <span class="gold-text">Under One Roof</span>
+        </h2>
+        <p class="text-text-sub text-sm leading-relaxed mb-8">
+          Most businesses deal with 4–6 different vendors for marketing, design, development, and advertising. With Renova, you get all of it from one dedicated team — fully aligned on your goals.
+        </p>
+        <a href="contact.html" class="btn-gold inline-block px-8 py-4 rounded-sm text-sm uppercase tracking-widest text-white">Get a Free Proposal</a>
+      </div>
+
+      <div class="space-y-3">
+        <div class="why-strip reveal rounded-sm px-6 py-4 flex items-center gap-4">
+          <div class="w-9 h-9 icon-box rounded-sm flex-shrink-0 flex items-center justify-center">
+            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <span class="text-sm font-semibold text-text-main">Full-Service Marketing &amp; Technology Agency</span>
+        </div>
+        <div class="why-strip reveal rounded-sm px-6 py-4 flex items-center gap-4">
+          <div class="w-9 h-9 icon-box rounded-sm flex-shrink-0 flex items-center justify-center">
+            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <span class="text-sm font-semibold text-text-main">Website, App &amp; Web Application Experts</span>
+        </div>
+        <div class="why-strip reveal rounded-sm px-6 py-4 flex items-center gap-4">
+          <div class="w-9 h-9 icon-box rounded-sm flex-shrink-0 flex items-center justify-center">
+            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <span class="text-sm font-semibold text-text-main">Canadian Influencer Network</span>
+        </div>
+        <div class="why-strip reveal rounded-sm px-6 py-4 flex items-center gap-4">
+          <div class="w-9 h-9 icon-box rounded-sm flex-shrink-0 flex items-center justify-center">
+            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <span class="text-sm font-semibold text-text-main">Digital Billboards Across North America</span>
+        </div>
+        <div class="why-strip reveal rounded-sm px-6 py-4 flex items-center gap-4">
+          <div class="w-9 h-9 icon-box rounded-sm flex-shrink-0 flex items-center justify-center">
+            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <span class="text-sm font-semibold text-text-main">Creative &amp; Data-Driven Strategies</span>
+        </div>
+        <div class="why-strip reveal rounded-sm px-6 py-4 flex items-center gap-4">
+          <div class="w-9 h-9 icon-box rounded-sm flex-shrink-0 flex items-center justify-center">
+            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <span class="text-sm font-semibold text-text-main">Dedicated Project Manager on Every Project</span>
+        </div>
+        <div class="why-strip reveal rounded-sm px-6 py-4 flex items-center gap-4">
+          <div class="w-9 h-9 icon-box rounded-sm flex-shrink-0 flex items-center justify-center">
+            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <span class="text-sm font-semibold text-text-main">Transparent Communication, No Surprises</span>
+        </div>
+        <div class="why-strip reveal rounded-sm px-6 py-4 flex items-center gap-4">
+          <div class="w-9 h-9 icon-box rounded-sm flex-shrink-0 flex items-center justify-center">
+            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <span class="text-sm font-semibold text-text-main">1 Month Free Support on Every Project</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ CAPABILITIES ════════ -->
+<section class="py-20 px-6 lg:px-12 bg-cream">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <div class="inline-flex items-center gap-2 mb-4">
+        <div class="w-6 h-px bg-gold opacity-60"></div>
+        <span class="text-xs uppercase tracking-widest text-gold font-semibold">What We Do</span>
+        <div class="w-6 h-px bg-gold opacity-60"></div>
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main">Our <span class="gold-text">Capabilities</span></h2>
+      <p class="text-text-sub text-sm mt-3 max-w-xl mx-auto">A complete suite of marketing and technology services — all under one roof.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div class="cap-item reveal"><span class="cap-dot"></span>Website Design &amp; Development</div>
+      <div class="cap-item reveal"><span class="cap-dot"></span>Web Application Development</div>
+      <div class="cap-item reveal"><span class="cap-dot"></span>Android App Development</div>
+      <div class="cap-item reveal"><span class="cap-dot"></span>iOS App Development</div>
+      <div class="cap-item reveal"><span class="cap-dot"></span>SEO Services</div>
+      <div class="cap-item reveal"><span class="cap-dot"></span>Graphic Design &amp; Branding</div>
+      <div class="cap-item reveal"><span class="cap-dot"></span>Social Media Marketing</div>
+      <div class="cap-item reveal"><span class="cap-dot"></span>Influencer Marketing</div>
+      <div class="cap-item reveal"><span class="cap-dot"></span>Digital Billboard Advertising</div>
+      <div class="cap-item reveal"><span class="cap-dot"></span>Product Photography</div>
+      <div class="cap-item reveal"><span class="cap-dot"></span>Video Production &amp; Content</div>
+      <div class="cap-item reveal"><span class="cap-dot"></span>Marketing Strategy &amp; Consulting</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ CTA BANNER ════════ -->
+<section class="py-20 px-6 lg:px-12" style="background:linear-gradient(135deg,#111110 0%,#1a1a18 60%,#111110 100%);">
+  <div class="max-w-4xl mx-auto text-center reveal">
+    <div class="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full border border-gold/25 bg-gold/8">
+      <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse inline-block"></span>
+      <span class="text-xs tracking-widest uppercase text-gold font-semibold">Ready to Start?</span>
+    </div>
+    <h2 class="text-3xl lg:text-5xl font-black text-white mb-4 leading-tight">
+      Let's Build Something <span class="gold-text">Exceptional</span>
+    </h2>
+    <p class="text-gray-400 text-base leading-relaxed mb-8 max-w-xl mx-auto">
+      Tell us about your project and we'll prepare a tailored proposal within 48 hours — no obligation, no fluff.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="contact.html"  class="btn-gold px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-bold text-white">Get a Free Proposal</a>
+      <a href="packages.html" class="inline-block px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-semibold text-white border border-white/20 hover:border-gold/50 hover:text-gold transition-all duration-200">View Packages</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ FOOTER ════════ -->
+<footer class="py-12 px-6 lg:px-12 border-t border-mid-gray bg-off-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <a href="index.html" class="inline-block mb-4">
+          <img src="assets/images/logo/logo.png" alt="Renova Marketing Solutions" class="h-9 w-auto object-contain" />
+        </a>
+        <p class="text-text-sub text-sm leading-relaxed max-w-xs">A full-service marketing and technology agency helping businesses build stronger brands across the USA and Canada.</p>
+        <p class="text-text-muted text-xs mt-3 italic">Creative Solutions. Measurable Results. Lasting Growth.</p>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4">Services</div>
+        <ul class="space-y-2">
+          <li><a href="index.html#services" class="text-xs text-text-sub hover:text-gold transition-colors">Website Development</a></li>
+          <li><a href="index.html#services" class="text-xs text-text-sub hover:text-gold transition-colors">Web Applications</a></li>
+          <li><a href="index.html#services" class="text-xs text-text-sub hover:text-gold transition-colors">Mobile Apps</a></li>
+          <li><a href="index.html#services" class="text-xs text-text-sub hover:text-gold transition-colors">SEO Services</a></li>
+          <li><a href="index.html#services" class="text-xs text-text-sub hover:text-gold transition-colors">Branding &amp; Design</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4">Company</div>
+        <ul class="space-y-2">
+          <li><a href="about.html"          class="text-xs text-gold font-semibold">About Us</a></li>
+          <li><a href="packages.html"       class="text-xs text-text-sub hover:text-gold transition-colors">Packages</a></li>
+          <li><a href="index.html#portfolio" class="text-xs text-text-sub hover:text-gold transition-colors">Portfolio</a></li>
+          <li><a href="contact.html"        class="text-xs text-text-sub hover:text-gold transition-colors">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="gold-divider mb-6"></div>
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-text-muted">&copy; 2025 Renova Marketing Solutions. All rights reserved.</p>
+      <p class="text-xs text-text-muted">USA &amp; Canada</p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Custom cursor ── */
+(function(){
+  const dot = document.createElement('div'), ring = document.createElement('div');
+  dot.id='cursor-dot'; ring.id='cursor-ring';
+  Object.assign(dot.style, { position:'fixed',width:'6px',height:'6px',borderRadius:'50%',background:'#b8922a',pointerEvents:'none',zIndex:'9999',transform:'translate(-50%,-50%)',top:'0',left:'0' });
+  Object.assign(ring.style,{ position:'fixed',width:'32px',height:'32px',borderRadius:'50%',border:'1.5px solid rgba(184,146,42,0.5)',pointerEvents:'none',zIndex:'9998',transform:'translate(-50%,-50%)',top:'0',left:'0',transition:'width .3s,height .3s,border-color .3s' });
+  document.body.appendChild(dot); document.body.appendChild(ring);
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; gsap.set(dot,{x:mx,y:my}); });
+  (function loop(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; gsap.set(ring,{x:rx,y:ry}); requestAnimationFrame(loop); })();
+  document.querySelectorAll('a,button,.stat-card,.value-card,.mv-card,.why-strip,.cap-item').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ ring.style.width='52px'; ring.style.height='52px'; ring.style.borderColor='rgba(184,146,42,0.9)'; });
+    el.addEventListener('mouseleave',()=>{ ring.style.width='32px'; ring.style.height='32px'; ring.style.borderColor='rgba(184,146,42,0.5)'; });
+  });
+})();
+
+/* ── Navbar ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', ()=>{ navbar.classList.toggle('nav-scrolled', window.scrollY>60); }, {passive:true});
+document.getElementById('hamburger').addEventListener('click', e=>{
+  e.stopPropagation();
+  const m = document.getElementById('mobile-menu');
+  m.style.display = m.style.display==='block' ? 'none' : 'block';
+});
+document.addEventListener('click', e=>{ if(!navbar.contains(e.target)) document.getElementById('mobile-menu').style.display='none'; });
+
+/* ── Hero entrance ── */
+gsap.set(['#a-badge','#a-title','#a-sub','#a-cta','#a-card'], {opacity:0, y:32});
+gsap.timeline({ delay:0.1, defaults:{ease:'expo.out'} })
+  .to('#a-badge', {opacity:1, y:0, duration:.7})
+  .to('#a-title', {opacity:1, y:0, duration:.9}, '-=.4')
+  .to('#a-sub',   {opacity:1, y:0, duration:.75},'-=.5')
+  .to('#a-cta',   {opacity:1, y:0, duration:.65},'-=.4')
+  .to('#a-card',  {opacity:1, y:0, duration:.8, ease:'back.out(1.3)'},'-=.6');
+
+/* ── Scroll reveals ── */
+gsap.utils.toArray('.reveal').forEach((el,i)=>{
+  gsap.set(el,{opacity:0, y:36});
+  ScrollTrigger.create({
+    trigger:el, start:'top 90%', once:true,
+    onEnter:()=> gsap.to(el,{opacity:1,y:0,duration:.8,delay:(i%4)*.07,ease:'expo.out'}),
+  });
+});
+
+/* why-strip slides from left */
+gsap.utils.toArray('.why-strip').forEach((el,i)=>{
+  gsap.set(el,{opacity:0, x:-20});
+  ScrollTrigger.create({
+    trigger:el, start:'top 91%', once:true,
+    onEnter:()=> gsap.to(el,{opacity:1,x:0,duration:.6,delay:i*.06,ease:'expo.out'}),
+  });
+});
+
+/* cap-items fade in */
+gsap.utils.toArray('.cap-item').forEach((el,i)=>{
+  gsap.set(el,{opacity:0, scale:.97});
+  ScrollTrigger.create({
+    trigger:el, start:'top 93%', once:true,
+    onEnter:()=> gsap.to(el,{opacity:1,scale:1,duration:.5,delay:(i%3)*.07,ease:'expo.out'}),
+  });
+});
+
+gsap.utils.toArray('.gold-divider').forEach(el=>{
+  gsap.set(el,{scaleX:0,transformOrigin:'left center'});
+  ScrollTrigger.create({trigger:el,start:'top 93%',once:true,
+    onEnter:()=> gsap.to(el,{scaleX:1,duration:1,ease:'expo.out'}),
+  });
+});
+
+/* stat counter animation */
+gsap.utils.toArray('.stat-card').forEach((card,i)=>{
+  gsap.set(card,{opacity:0,y:28,scale:.97});
+  ScrollTrigger.create({trigger:card,start:'top 90%',once:true,
+    onEnter:()=> gsap.to(card,{opacity:1,y:0,scale:1,duration:.7,delay:i*.1,ease:'expo.out'}),
+  });
+});
+
+/* timeline items */
+gsap.utils.toArray('.timeline-dot').forEach((dot,i)=>{
+  gsap.set(dot,{scale:0,opacity:0});
+  ScrollTrigger.create({trigger:dot,start:'top 88%',once:true,
+    onEnter:()=> gsap.to(dot,{scale:1,opacity:1,duration:.5,delay:.1,ease:'back.out(2)'}),
+  });
+});
+
+/* ── Magnetic buttons ── */
+document.querySelectorAll('.btn-gold,.btn-outline').forEach(btn=>{
+  btn.addEventListener('mousemove', e=>{
+    const r=btn.getBoundingClientRect();
+    gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.22,y:(e.clientY-r.top-r.height/2)*.18,duration:.4,ease:'power2.out'});
+  });
+  btn.addEventListener('mouseleave',()=> gsap.to(btn,{x:0,y:0,duration:.6,ease:'elastic.out(1,.5)'}));
+});
+
+/* ── Value card tilt ── */
+document.querySelectorAll('.value-card,.mv-card,.stat-card').forEach(card=>{
+  card.addEventListener('mousemove', e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    gsap.to(card,{rotateY:x*5,rotateX:-y*5,duration:.4,ease:'power2.out',transformPerspective:900,transformStyle:'preserve-3d'});
+  });
+  card.addEventListener('mouseleave',()=> gsap.to(card,{rotateY:0,rotateX:0,duration:.7,ease:'elastic.out(1,.6)'}));
+});
+
+/* ── Footer ── */
+gsap.from('footer',{opacity:0,y:24,duration:.9,ease:'expo.out',scrollTrigger:{trigger:'footer',start:'top 95%',once:true}});
+</script>
+</body>
+</html>
