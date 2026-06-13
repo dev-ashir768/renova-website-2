@@ -206,6 +206,13 @@ body {
 /* ── Reveal (GSAP sets from JS) ──────────── */
 .reveal { will-change: transform, opacity; }
 
+/* ── Form validation states ──────────────── */
+.form-input.input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.1) !important;
+}
+.field-error { display: none; }
+
 /* ── Scrollbar ───────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #f0efe9; }

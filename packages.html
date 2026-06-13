@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Packages — Renova Marketing Solutions</title>
+  <link rel="icon" type="image/png" href="assets/images/logo/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold:'#b8922a','gold-light':'#d4a93a','gold-dark':'#8a6b1e',
+            cream:'#fafaf8','off-white':'#f5f4f0','mid-gray':'#e0dfd9',
+            'text-main':'#111110','text-sub':'#5a5a55','text-muted':'#9a9a94',
+          },
+          fontFamily: { sans:['Inter','system-ui','sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    .pkg-hero { background:#fafaf8; position:relative; overflow:hidden; }
+    .pkg-hero::before {
+      content:''; position:absolute; inset:0;
+      background-image: linear-gradient(rgba(184,146,42,0.04) 1px,transparent 1px),
+                        linear-gradient(90deg,rgba(184,146,42,0.04) 1px,transparent 1px);
+      background-size:80px 80px;
+    }
+    .pkg-hero::after {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(212,169,58,0.08) 0%, transparent 70%);
+    }
+
+    /* Package card */
+    .pkg-card {
+      background:#fff; border:1px solid #e8e7e2;
+      transition: border-color .3s, box-shadow .3s, transform .3s;
+      position:relative; overflow:hidden;
+    }
+    .pkg-card:hover {
+      border-color:rgba(184,146,42,.35);
+      box-shadow:0 12px 48px rgba(184,146,42,.12);
+      transform:translateY(-5px);
+    }
+    .pkg-card.featured {
+      border:1.5px solid rgba(184,146,42,.5);
+      background:linear-gradient(160deg,#fffef8 0%,#fff 60%);
+    }
+    .pkg-card.featured::before {
+      content:'Most Popular';
+      position:absolute; top:16px; right:-28px;
+      background:linear-gradient(135deg,#b8922a,#d4a93a);
+      color:#fff; font-size:10px; font-weight:800;
+      letter-spacing:.12em; text-transform:uppercase;
+      padding:4px 36px; transform:rotate(45deg);
+    }
+
+    .pkg-check {
+      display:flex; align-items:flex-start; gap:10px;
+      font-size:13px; color:#5a5a55; line-height:1.5;
+    }
+    .pkg-check::before {
+      content:''; flex-shrink:0; width:16px; height:16px; margin-top:2px;
+      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23b8922a'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+
+    .tab-btn { transition: all .2s ease; position:relative; }
+    .tab-btn.active { color:#b8922a; }
+    .tab-btn.active::after {
+      content:''; position:absolute; bottom:-1px; left:0; right:0;
+      height:2px; background:linear-gradient(90deg,#b8922a,#d4a93a);
+      border-radius:1px;
+    }
+
+    .pkg-panel { display:none; }
+    .pkg-panel.active { display:block; }
+
+    /* Custom dev card */
+    .dev-card {
+      background:#fff; border:1px solid #e8e7e2;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .dev-card:hover {
+      border-color:rgba(184,146,42,.3);
+      box-shadow:0 4px 20px rgba(184,146,42,.08);
+    }
+
+    /* Included grid */
+    .included-item {
+      display:flex; align-items:center; gap:10px;
+      font-size:13px; color:#5a5a55; font-weight:500;
+    }
+    .included-item svg { flex-shrink:0; }
+  </style>
+</head>
+<body class="bg-cream text-text-main font-sans">
+
+<!-- ════════ NAVBAR ════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center">
+      <img src="assets/images/logo/logo.png" alt="Renova Marketing Solutions" class="h-10 w-auto object-contain" />
+    </a>
+    <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
+      <li><a href="index.html#services"  class="text-text-sub hover:text-text-main transition-colors">Services</a></li>
+      <li><a href="packages.html"        class="text-gold font-semibold">Packages</a></li>
+      <li><a href="index.html#portfolio" class="text-text-sub hover:text-text-main transition-colors">Portfolio</a></li>
+      <li><a href="index.html#about"     class="text-text-sub hover:text-text-main transition-colors">About</a></li>
+      <li><a href="contact.html"         class="btn-gold px-5 py-2.5 rounded-sm text-sm text-white">Get Started</a></li>
+    </ul>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+      <span class="block w-6 h-0.5 bg-text-main"></span>
+      <span class="block w-6 h-0.5 bg-text-main"></span>
+      <span class="block w-4 h-0.5 bg-text-main"></span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-lg" style="display:none;">
+    <ul class="flex flex-col py-3 px-6">
+      <li><a href="index.html#services"  class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50">Services</a></li>
+      <li><a href="packages.html"        class="block py-3 text-sm font-semibold text-gold border-b border-gray-50">Packages</a></li>
+      <li><a href="index.html#portfolio" class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50">Portfolio</a></li>
+      <li><a href="index.html#about"     class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50">About</a></li>
+      <li class="pt-3"><a href="contact.html" class="btn-gold block text-center py-3 rounded-sm text-sm text-white">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- ════════ HERO ════════ -->
+<section class="pkg-hero pt-40 pb-16 px-6 lg:px-12">
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <div id="p-badge" class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-gold/20 bg-gold/5">
+      <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse inline-block"></span>
+      <span class="text-xs tracking-widest uppercase text-gold font-semibold">Business Launch Packages</span>
+    </div>
+    <h1 id="p-title" class="text-5xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-5">
+      Professional <span class="gold-text">Website</span><br/>&amp; Branding Solutions
+    </h1>
+    <p id="p-sub" class="text-text-sub text-lg max-w-2xl mx-auto leading-relaxed mb-8">
+      Whether you're launching a new business or growing an existing brand, our packages provide everything you need to stand out in today's competitive marketplace.
+    </p>
+    <div id="p-cta" class="flex flex-wrap items-center justify-center gap-4">
+      <a href="contact.html" class="btn-gold px-8 py-4 rounded-sm text-sm uppercase tracking-widest text-white">Request Pricing</a>
+      <a href="#packages" class="btn-outline px-8 py-4 rounded-sm text-sm uppercase tracking-widest">Compare Packages</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ TABS ════════ -->
+<section id="packages" class="py-20 px-6 lg:px-12 bg-cream">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Tab nav -->
+    <div class="flex items-center gap-0 border-b border-mid-gray mb-14 overflow-x-auto reveal">
+      <button class="tab-btn active px-5 py-3.5 text-xs uppercase tracking-widest font-bold whitespace-nowrap" data-tab="business">Business</button>
+      <button class="tab-btn px-5 py-3.5 text-xs uppercase tracking-widest font-semibold text-text-muted whitespace-nowrap" data-tab="ecommerce">E-Commerce</button>
+      <button class="tab-btn px-5 py-3.5 text-xs uppercase tracking-widest font-semibold text-text-muted whitespace-nowrap" data-tab="custom">Custom Dev</button>
+    </div>
+
+    <!-- ── TAB: Business Packages ── -->
+    <div class="pkg-panel active" id="tab-business">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Starter -->
+        <div class="pkg-card reveal rounded-sm p-8 flex flex-col">
+          <div class="mb-6">
+            <div class="inline-flex items-center gap-2 mb-3">
+              <div class="w-8 h-8 rounded-sm icon-box flex items-center justify-center">
+                <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+              </div>
+              <span class="text-xs uppercase tracking-widest text-gold font-semibold">Starter</span>
+            </div>
+            <h3 class="text-2xl font-black text-text-main mb-2">Starter Business<br/>Package</h3>
+            <p class="text-xs text-text-sub leading-relaxed">Perfect for startups, entrepreneurs &amp; small businesses establishing a professional online presence.</p>
+          </div>
+
+          <div class="gold-divider mb-6"></div>
+
+          <div class="space-y-2.5 flex-1 mb-8">
+            <div class="pkg-check">Professional Website Development (Up to 5 Pages)</div>
+            <div class="pkg-check">Mobile Responsive Design</div>
+            <div class="pkg-check">Contact Form Integration</div>
+            <div class="pkg-check">Google Maps Integration</div>
+            <div class="pkg-check">Basic SEO Setup</div>
+            <div class="pkg-check">Social Media Integration</div>
+            <div class="pkg-check">Custom Logo Design</div>
+            <div class="pkg-check">Business Card Design</div>
+            <div class="pkg-check">Letterhead Design</div>
+            <div class="pkg-check">Professional Email Signature</div>
+            <div class="pkg-check">1 Month Free Support</div>
+          </div>
+
+          <div class="mb-5">
+            <div class="text-xs uppercase tracking-widest text-text-muted mb-2 font-semibold">Ideal For</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 rounded-sm bg-off-white text-xs text-text-sub">Startups</span>
+              <span class="px-2.5 py-1 rounded-sm bg-off-white text-xs text-text-sub">Local Businesses</span>
+              <span class="px-2.5 py-1 rounded-sm bg-off-white text-xs text-text-sub">Consultants</span>
+              <span class="px-2.5 py-1 rounded-sm bg-off-white text-xs text-text-sub">Service Providers</span>
+            </div>
+          </div>
+
+          <a href="contact.html" class="btn-outline block text-center py-3.5 rounded-sm text-xs uppercase tracking-widest font-semibold">Request Pricing</a>
+        </div>
+
+        <!-- Growth (Featured) -->
+        <div class="pkg-card featured reveal rounded-sm p-8 flex flex-col">
+          <div class="mb-6">
+            <div class="inline-flex items-center gap-2 mb-3">
+              <div class="w-8 h-8 rounded-sm icon-box flex items-center justify-center">
+                <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+              </div>
+              <span class="text-xs uppercase tracking-widest text-gold font-semibold">Growth</span>
+            </div>
+            <h3 class="text-2xl font-black text-text-main mb-2">Growth Business<br/>Package</h3>
+            <p class="text-xs text-text-sub leading-relaxed">Designed for businesses looking to expand their online presence and strengthen brand identity.</p>
+          </div>
+
+          <div class="gold-divider mb-6"></div>
+
+          <div class="space-y-2.5 flex-1 mb-8">
+            <div class="pkg-check">Professional Website Development (Up to 10 Pages)</div>
+            <div class="pkg-check">Custom Website Design</div>
+            <div class="pkg-check">Mobile Responsive Design</div>
+            <div class="pkg-check">Lead Generation Forms</div>
+            <div class="pkg-check">Advanced SEO Setup</div>
+            <div class="pkg-check">Google Analytics Integration</div>
+            <div class="pkg-check">Speed Optimization</div>
+            <div class="pkg-check">Professional Logo Design</div>
+            <div class="pkg-check">Complete Brand Identity</div>
+            <div class="pkg-check">Business Card Design</div>
+            <div class="pkg-check">Letterhead Design</div>
+            <div class="pkg-check">Envelope Design</div>
+            <div class="pkg-check">Social Media Profile Branding</div>
+            <div class="pkg-check">1 Month Free Support</div>
+          </div>
+
+          <div class="mb-5">
+            <div class="text-xs uppercase tracking-widest text-text-muted mb-2 font-semibold">Ideal For</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 rounded-sm bg-gold/8 text-xs text-text-sub">Growing Businesses</span>
+              <span class="px-2.5 py-1 rounded-sm bg-gold/8 text-xs text-text-sub">Retail Stores</span>
+              <span class="px-2.5 py-1 rounded-sm bg-gold/8 text-xs text-text-sub">Restaurants</span>
+              <span class="px-2.5 py-1 rounded-sm bg-gold/8 text-xs text-text-sub">Professional Services</span>
+            </div>
+          </div>
+
+          <a href="contact.html" class="btn-gold block text-center py-3.5 rounded-sm text-xs uppercase tracking-widest font-bold text-white">Request Pricing</a>
+        </div>
+
+        <!-- Premium -->
+        <div class="pkg-card reveal rounded-sm p-8 flex flex-col">
+          <div class="mb-6">
+            <div class="inline-flex items-center gap-2 mb-3">
+              <div class="w-8 h-8 rounded-sm icon-box flex items-center justify-center">
+                <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+              </div>
+              <span class="text-xs uppercase tracking-widest text-gold font-semibold">Premium</span>
+            </div>
+            <h3 class="text-2xl font-black text-text-main mb-2">Premium Business<br/>Package</h3>
+            <p class="text-xs text-text-sub leading-relaxed">A complete branding &amp; website solution for businesses seeking a premium online presence.</p>
+          </div>
+
+          <div class="gold-divider mb-6"></div>
+
+          <div class="space-y-2.5 flex-1 mb-8">
+            <div class="pkg-check">Premium Custom Website (Up to 20 Pages)</div>
+            <div class="pkg-check">Custom UI/UX Design</div>
+            <div class="pkg-check">Conversion-Focused Layouts</div>
+            <div class="pkg-check">Blog Integration</div>
+            <div class="pkg-check">Lead Generation System</div>
+            <div class="pkg-check">Advanced SEO Foundation</div>
+            <div class="pkg-check">Speed &amp; Performance Optimization</div>
+            <div class="pkg-check">Complete Brand Identity Package</div>
+            <div class="pkg-check">Logo Design</div>
+            <div class="pkg-check">Business Card Design</div>
+            <div class="pkg-check">Letterhead &amp; Envelope Design</div>
+            <div class="pkg-check">Presentation Folder Design</div>
+            <div class="pkg-check">Social Media Branding Kit</div>
+            <div class="pkg-check">Marketing Brochure Design</div>
+            <div class="pkg-check">1 Month Free Support</div>
+          </div>
+
+          <div class="mb-5">
+            <div class="text-xs uppercase tracking-widest text-text-muted mb-2 font-semibold">Ideal For</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 rounded-sm bg-off-white text-xs text-text-sub">Established Companies</span>
+              <span class="px-2.5 py-1 rounded-sm bg-off-white text-xs text-text-sub">Corporate Brands</span>
+              <span class="px-2.5 py-1 rounded-sm bg-off-white text-xs text-text-sub">High-Growth Businesses</span>
+            </div>
+          </div>
+
+          <a href="contact.html" class="btn-outline block text-center py-3.5 rounded-sm text-xs uppercase tracking-widest font-semibold">Request Pricing</a>
+        </div>
+
+      </div>
+    </div><!-- /tab-business -->
+
+    <!-- ── TAB: E-Commerce ── -->
+    <div class="pkg-panel" id="tab-ecommerce">
+      <div class="max-w-2xl mx-auto">
+        <div class="pkg-card featured reveal rounded-sm p-10 flex flex-col">
+          <div class="flex items-start gap-5 mb-7">
+            <div class="w-14 h-14 flex-shrink-0 rounded-sm icon-box flex items-center justify-center">
+              <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+            </div>
+            <div>
+              <span class="text-xs uppercase tracking-widest text-gold font-semibold">E-Commerce</span>
+              <h3 class="text-3xl font-black text-text-main mt-1 mb-2">E-Commerce Package</h3>
+              <p class="text-sm text-text-sub leading-relaxed">Launch and grow your online store with a professional e-commerce solution built for conversions.</p>
+            </div>
+          </div>
+
+          <div class="gold-divider mb-7"></div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 mb-8">
+            <div class="pkg-check">E-Commerce Website Development</div>
+            <div class="pkg-check">Product Management System</div>
+            <div class="pkg-check">Secure Payment Gateway Integration</div>
+            <div class="pkg-check">Shipping Configuration</div>
+            <div class="pkg-check">Mobile Responsive Design</div>
+            <div class="pkg-check">SEO-Friendly Store Structure</div>
+            <div class="pkg-check">Professional Logo Design</div>
+            <div class="pkg-check">Brand Identity Package</div>
+            <div class="pkg-check">Product Category Setup</div>
+            <div class="pkg-check">Store Management Training</div>
+            <div class="pkg-check">1 Month Free Support</div>
+          </div>
+
+          <div class="mb-7">
+            <div class="text-xs uppercase tracking-widest text-text-muted mb-3 font-semibold">Ideal For</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-sm bg-gold/8 text-xs text-text-sub">Online Retailers</span>
+              <span class="px-3 py-1.5 rounded-sm bg-gold/8 text-xs text-text-sub">Fashion Brands</span>
+              <span class="px-3 py-1.5 rounded-sm bg-gold/8 text-xs text-text-sub">Beauty Brands</span>
+              <span class="px-3 py-1.5 rounded-sm bg-gold/8 text-xs text-text-sub">Food &amp; Beverage</span>
+              <span class="px-3 py-1.5 rounded-sm bg-gold/8 text-xs text-text-sub">Product-Based Companies</span>
+            </div>
+          </div>
+
+          <a href="contact.html" class="btn-gold block text-center py-4 rounded-sm text-sm uppercase tracking-widest font-bold text-white">Request Pricing</a>
+        </div>
+      </div>
+    </div><!-- /tab-ecommerce -->
+
+    <!-- ── TAB: Custom Dev ── -->
+    <div class="pkg-panel" id="tab-custom">
+      <div class="mb-8 reveal">
+        <h2 class="text-3xl lg:text-4xl font-black text-text-main mb-3">Custom <span class="gold-text">Development</span> Solutions</h2>
+        <p class="text-text-sub text-base max-w-2xl">Need something beyond a traditional website? Our team develops custom digital solutions tailored to your exact business needs.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="dev-card reveal rounded-sm p-6">
+          <div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/></svg>
+          </div>
+          <h4 class="text-sm font-bold text-text-main mb-1">Custom Web Applications</h4>
+          <p class="text-xs text-text-sub leading-relaxed">Tailor-made web apps built for your workflow, customers, and scale.</p>
+        </div>
+        <div class="dev-card reveal rounded-sm p-6">
+          <div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3"/></svg>
+          </div>
+          <h4 class="text-sm font-bold text-text-main mb-1">Android &amp; iOS Apps</h4>
+          <p class="text-xs text-text-sub leading-relaxed">Native and cross-platform mobile apps that deliver seamless user experiences.</p>
+        </div>
+        <div class="dev-card reveal rounded-sm p-6">
+          <div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253M3 12c0 .778.099 1.533.284 2.253"/></svg>
+          </div>
+          <h4 class="text-sm font-bold text-text-main mb-1">SaaS Platform Development</h4>
+          <p class="text-xs text-text-sub leading-relaxed">Build subscription-based software products from the ground up.</p>
+        </div>
+        <div class="dev-card reveal rounded-sm p-6">
+          <div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+          </div>
+          <h4 class="text-sm font-bold text-text-main mb-1">Customer Portals &amp; CRMs</h4>
+          <p class="text-xs text-text-sub leading-relaxed">Custom portals and CRM systems to manage clients, leads, and operations.</p>
+        </div>
+        <div class="dev-card reveal rounded-sm p-6">
+          <div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+          </div>
+          <h4 class="text-sm font-bold text-text-main mb-1">Booking Systems</h4>
+          <p class="text-xs text-text-sub leading-relaxed">Online appointment and reservation systems built for your business model.</p>
+        </div>
+        <div class="dev-card reveal rounded-sm p-6">
+          <div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875c-1.243 0-2.25.84-2.25 1.875 0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.401.604-.401.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.959.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z"/></svg>
+          </div>
+          <h4 class="text-sm font-bold text-text-main mb-1">API &amp; Business Automation</h4>
+          <p class="text-xs text-text-sub leading-relaxed">API integrations and automation tools that streamline your operations.</p>
+        </div>
+      </div>
+      <div class="mt-8 text-center reveal">
+        <a href="contact.html" class="btn-gold inline-block px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-bold text-white">Request a Custom Quote</a>
+      </div>
+    </div><!-- /tab-custom -->
+
+  </div>
+</section>
+
+
+<!-- ════════ INCLUDED WITH EVERY PROJECT ════════ -->
+<section class="py-20 px-6 lg:px-12 bg-off-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <div class="inline-flex items-center gap-2 mb-4">
+        <div class="w-6 h-px bg-gold opacity-60"></div>
+        <span class="text-xs uppercase tracking-widest text-gold font-semibold">Every Project</span>
+        <div class="w-6 h-px bg-gold opacity-60"></div>
+      </div>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main">What's Included <span class="gold-text">With Every Project</span></h2>
+      <p class="text-text-sub text-sm mt-3 max-w-xl mx-auto">Every Renova project is built with quality, performance, and long-term success in mind.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="reveal bg-white border border-mid-gray rounded-sm px-6 py-5">
+        <div class="included-item">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3"/></svg>
+          Mobile-Friendly Design
+        </div>
+      </div>
+      <div class="reveal bg-white border border-mid-gray rounded-sm px-6 py-5">
+        <div class="included-item">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+          SEO-Friendly Structure
+        </div>
+      </div>
+      <div class="reveal bg-white border border-mid-gray rounded-sm px-6 py-5">
+        <div class="included-item">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+          Fast Loading Performance
+        </div>
+      </div>
+      <div class="reveal bg-white border border-mid-gray rounded-sm px-6 py-5">
+        <div class="included-item">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          Secure Website Setup
+        </div>
+      </div>
+      <div class="reveal bg-white border border-mid-gray rounded-sm px-6 py-5">
+        <div class="included-item">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+          Professional Branding Assets
+        </div>
+      </div>
+      <div class="reveal bg-white border border-mid-gray rounded-sm px-6 py-5">
+        <div class="included-item">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+          Dedicated Project Manager
+        </div>
+      </div>
+      <div class="reveal bg-white border border-mid-gray rounded-sm px-6 py-5">
+        <div class="included-item">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
+          Transparent Communication
+        </div>
+      </div>
+      <div class="reveal bg-white border border-mid-gray rounded-sm px-6 py-5">
+        <div class="included-item">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Quality Assurance Testing
+        </div>
+      </div>
+      <div class="reveal bg-white border border-mid-gray rounded-sm px-6 py-5">
+        <div class="included-item">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          1 Month Free Support
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ CUSTOM CTA ════════ -->
+<section class="py-20 px-6 lg:px-12 bg-cream">
+  <div class="max-w-3xl mx-auto text-center reveal">
+    <div class="inline-flex items-center gap-2 mb-5">
+      <div class="w-6 h-px bg-gold opacity-60"></div>
+      <span class="text-xs uppercase tracking-widest text-gold font-semibold">Tailored for You</span>
+      <div class="w-6 h-px bg-gold opacity-60"></div>
+    </div>
+    <h2 class="text-3xl lg:text-5xl font-black text-text-main mb-4">Need a <span class="gold-text">Custom Solution?</span></h2>
+    <p class="text-text-sub text-base leading-relaxed mb-8 max-w-xl mx-auto">
+      Every business is unique. Whether you need a website, mobile app, SEO campaign, influencer marketing, or digital billboard advertising — we'll prepare a tailored proposal designed specifically for you.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="contact.html" class="btn-gold px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-bold text-white">Request Pricing</a>
+      <a href="index.html#portfolio" class="btn-outline px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-semibold">View Our Work</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ FOOTER ════════ -->
+<footer class="py-12 px-6 lg:px-12 border-t border-mid-gray bg-off-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <a href="index.html" class="inline-block mb-4">
+          <img src="assets/images/logo/logo.png" alt="Renova Marketing Solutions" class="h-9 w-auto object-contain" />
+        </a>
+        <p class="text-text-sub text-sm leading-relaxed max-w-xs">A full-service marketing and technology agency helping businesses build stronger brands across the USA and Canada.</p>
+        <p class="text-text-muted text-xs mt-3 italic">Creative Solutions. Measurable Results. Lasting Growth.</p>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4">Services</div>
+        <ul class="space-y-2">
+          <li><a href="index.html#services" class="text-xs text-text-sub hover:text-gold transition-colors">Website Development</a></li>
+          <li><a href="index.html#services" class="text-xs text-text-sub hover:text-gold transition-colors">Web Applications</a></li>
+          <li><a href="index.html#services" class="text-xs text-text-sub hover:text-gold transition-colors">Mobile Apps</a></li>
+          <li><a href="index.html#services" class="text-xs text-text-sub hover:text-gold transition-colors">SEO Services</a></li>
+          <li><a href="index.html#services" class="text-xs text-text-sub hover:text-gold transition-colors">Branding & Design</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4">Quick Links</div>
+        <ul class="space-y-2">
+          <li><a href="packages.html"        class="text-xs text-gold font-semibold">Packages</a></li>
+          <li><a href="index.html#portfolio" class="text-xs text-text-sub hover:text-gold transition-colors">Portfolio</a></li>
+          <li><a href="index.html#about"     class="text-xs text-text-sub hover:text-gold transition-colors">About Us</a></li>
+          <li><a href="contact.html"         class="text-xs text-text-sub hover:text-gold transition-colors">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="gold-divider mb-6"></div>
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-text-muted">&copy; 2025 Renova Marketing Solutions. All rights reserved.</p>
+      <p class="text-xs text-text-muted">USA & Canada</p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Custom cursor ── */
+(function() {
+  const dot  = document.createElement('div');
+  const ring = document.createElement('div');
+  dot.id = 'cursor-dot'; ring.id = 'cursor-ring';
+  Object.assign(dot.style,  { position:'fixed', width:'6px', height:'6px', borderRadius:'50%', background:'#b8922a', pointerEvents:'none', zIndex:'9999', transform:'translate(-50%,-50%)', top:'0', left:'0' });
+  Object.assign(ring.style, { position:'fixed', width:'32px', height:'32px', borderRadius:'50%', border:'1.5px solid rgba(184,146,42,0.5)', pointerEvents:'none', zIndex:'9998', transform:'translate(-50%,-50%)', top:'0', left:'0', transition:'width .3s, height .3s, border-color .3s' });
+  document.body.appendChild(dot);
+  document.body.appendChild(ring);
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; gsap.set(dot,{x:mx,y:my}); });
+  (function loop(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; gsap.set(ring,{x:rx,y:ry}); requestAnimationFrame(loop); })();
+  document.querySelectorAll('a, button, .pkg-card, .dev-card').forEach(el => {
+    el.addEventListener('mouseenter', ()=>{ ring.style.width='52px'; ring.style.height='52px'; ring.style.borderColor='rgba(184,146,42,0.9)'; });
+    el.addEventListener('mouseleave', ()=>{ ring.style.width='32px'; ring.style.height='32px'; ring.style.borderColor='rgba(184,146,42,0.5)'; });
+  });
+})();
+
+/* ── Navbar ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('nav-scrolled', window.scrollY > 60); }, { passive:true });
+document.getElementById('hamburger').addEventListener('click', e => {
+  e.stopPropagation();
+  const m = document.getElementById('mobile-menu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+});
+document.addEventListener('click', e => { if (!navbar.contains(e.target)) document.getElementById('mobile-menu').style.display='none'; });
+
+/* ── Hero entrance ── */
+gsap.set(['#p-badge','#p-title','#p-sub','#p-cta'], { opacity:0, y:28 });
+gsap.timeline({ delay:0.1, defaults:{ ease:'expo.out' } })
+  .to('#p-badge', { opacity:1, y:0, duration:.7 })
+  .to('#p-title', { opacity:1, y:0, duration:.9 }, '-=.4')
+  .to('#p-sub',   { opacity:1, y:0, duration:.75}, '-=.5')
+  .to('#p-cta',   { opacity:1, y:0, duration:.65}, '-=.4');
+
+/* ── Tabs ── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.classList.add('text-text-muted'); });
+    document.querySelectorAll('.pkg-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active'); btn.classList.remove('text-text-muted');
+    const panel = document.getElementById('tab-' + btn.dataset.tab);
+    panel.classList.add('active');
+    gsap.fromTo(panel, { opacity:0, y:16 }, { opacity:1, y:0, duration:.45, ease:'expo.out' });
+    // Re-trigger reveals inside newly shown panel
+    ScrollTrigger.refresh();
+  });
+});
+
+/* ── Scroll reveals ── */
+gsap.utils.toArray('.reveal').forEach((el, i) => {
+  gsap.set(el, { opacity:0, y:36 });
+  ScrollTrigger.create({
+    trigger:el, start:'top 90%', once:true,
+    onEnter: () => gsap.to(el, { opacity:1, y:0, duration:.8, delay:(i%4)*.07, ease:'expo.out' }),
+  });
+});
+
+gsap.utils.toArray('.gold-divider').forEach(el => {
+  gsap.set(el, { scaleX:0, transformOrigin:'left center' });
+  ScrollTrigger.create({
+    trigger:el, start:'top 93%', once:true,
+    onEnter: () => gsap.to(el, { scaleX:1, duration:1, ease:'expo.out' }),
+  });
+});
+
+/* ── Package card hover tilt ── */
+document.querySelectorAll('.pkg-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    gsap.to(card, { rotateY:x*5, rotateX:-y*5, duration:.4, ease:'power2.out', transformPerspective:900 });
+  });
+  card.addEventListener('mouseleave', () => {
+    gsap.to(card, { rotateY:0, rotateX:0, duration:.7, ease:'elastic.out(1,.6)' });
+  });
+});
+
+/* ── Magnetic buttons ── */
+document.querySelectorAll('.btn-gold, .btn-outline').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    gsap.to(btn, { x:(e.clientX-r.left-r.width/2)*.22, y:(e.clientY-r.top-r.height/2)*.18, duration:.4, ease:'power2.out' });
+  });
+  btn.addEventListener('mouseleave', () => gsap.to(btn, { x:0, y:0, duration:.6, ease:'elastic.out(1,.5)' }));
+});
+
+/* ── Footer reveal ── */
+gsap.from('footer', { opacity:0, y:24, duration:.9, ease:'expo.out', scrollTrigger:{ trigger:'footer', start:'top 95%', once:true } });
+</script>
+</body>
+</html>

@@ -345,19 +345,46 @@ document.querySelectorAll('.faq-trigger').forEach(trigger => {
 
 
 /* ── 11. CONTACT FORM ────────────────────────────────────────────────── */
-document.getElementById('contact-form').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const btn = this.querySelector('button[type="submit"]');
-  gsap.to(btn, { scale: 0.97, duration: 0.1, yoyo: true, repeat: 1 });
-  btn.textContent = 'Message Sent ✓';
-  btn.disabled = true;
-  btn.style.opacity = '0.7';
-  setTimeout(() => {
-    btn.textContent = 'Send Your Project Details';
-    btn.disabled = false;
-    btn.style.opacity = '1';
-  }, 4000);
-});
+(function () {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  Validate.attachLiveValidation(['#c-name','#c-email','#c-phone','#c-project','#c-message']);
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const valid = Validate.all({
+      '#c-name':    { required: true },
+      '#c-email':   { required: true, email: true },
+      '#c-phone':   { phone: true },
+      '#c-project': { select: true },
+      '#c-message': { required: true, minLen: 20 },
+    });
+
+    if (!valid) {
+      Validate.shakeBtn(form.querySelector('button[type="submit"]'));
+      return;
+    }
+
+    const btn = form.querySelector('button[type="submit"]');
+    const orig = btn.textContent;
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = 'linear-gradient(135deg,#2d8a4e,#3aad64)';
+      gsap.fromTo(btn, { scale: 0.97 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' });
+      form.reset();
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 4500);
+    }, 700);
+  });
+})();
 
 
 /* ── 12. FOOTER REVEAL ───────────────────────────────────────────────── */
