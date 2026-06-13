@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Renova Marketing Solutions</title>
+  <link rel="icon" type="image/png" href="assets/images/logo/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold:'#b8922a','gold-light':'#d4a93a','gold-dark':'#8a6b1e',
+            cream:'#fafaf8','off-white':'#f5f4f0','mid-gray':'#e0dfd9',
+            'text-main':'#111110','text-sub':'#5a5a55','text-muted':'#9a9a94',
+          },
+          fontFamily:{ sans:['Inter','system-ui','sans-serif'] },
+        }
+      }
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    .svc-hero { background:#fafaf8; position:relative; overflow:hidden; }
+    .svc-hero::before {
+      content:''; position:absolute; inset:0;
+      background-image: linear-gradient(rgba(184,146,42,0.045) 1px,transparent 1px),
+                        linear-gradient(90deg,rgba(184,146,42,0.045) 1px,transparent 1px);
+      background-size:80px 80px;
+    }
+    .svc-hero::after {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(212,169,58,0.09) 0%,transparent 70%);
+    }
+
+    /* Filter tabs */
+    .filter-btn {
+      border:1.5px solid #e0dfd9; background:#fff; color:#5a5a55;
+      font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+      padding:8px 18px; border-radius:2px; cursor:pointer;
+      transition: all .2s ease;
+    }
+    .filter-btn:hover { border-color:#b8922a; color:#b8922a; background:rgba(184,146,42,.04); }
+    .filter-btn.active { border-color:#b8922a; background:#b8922a; color:#fff; }
+
+    /* Service card */
+    .svc-card {
+      background:#fff; border:1px solid #e8e7e2;
+      transition: border-color .3s, box-shadow .3s, transform .3s;
+      transform-style: preserve-3d;
+      position:relative; overflow:hidden;
+    }
+    .svc-card::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,#b8922a,#d4a93a);
+      transform:scaleX(0); transform-origin:left;
+      transition:transform .35s ease;
+    }
+    .svc-card:hover::after { transform:scaleX(1); }
+    .svc-card:hover {
+      border-color:rgba(184,146,42,.35);
+      box-shadow:0 10px 40px rgba(184,146,42,.12);
+      transform:translateY(-5px);
+    }
+    .svc-card.hidden-card { display:none; }
+
+    /* Sub-item bullet */
+    .sub-item {
+      display:flex; align-items:center; gap:8px;
+      font-size:12px; color:#5a5a55; font-weight:500;
+    }
+    .sub-dot { width:5px; height:5px; border-radius:50%; background:#b8922a; flex-shrink:0; }
+
+    /* Detail section alternating */
+    .detail-section { position:relative; }
+    .detail-section:nth-child(even) { background:#f5f4f0; }
+    .detail-section:nth-child(odd)  { background:#fafaf8; }
+
+    /* Detail card (right side) */
+    .detail-card {
+      background:#fff; border:1px solid #e8e7e2;
+      position:relative; overflow:hidden;
+    }
+    .detail-card::before {
+      content:''; position:absolute; top:0; left:0; width:3px; height:100%;
+      background:linear-gradient(180deg,#b8922a,#d4a93a,#8a6b1e);
+    }
+
+    /* Process step */
+    .process-dot {
+      width:36px; height:36px; border-radius:50%; flex-shrink:0;
+      background:linear-gradient(135deg,#b8922a,#d4a93a);
+      display:flex; align-items:center; justify-content:center;
+      font-size:11px; font-weight:900; color:#fff;
+    }
+
+    /* Category badge */
+    .cat-badge {
+      display:inline-block; font-size:10px; font-weight:800; letter-spacing:.1em;
+      text-transform:uppercase; padding:3px 10px; border-radius:2px;
+      background:rgba(184,146,42,.1); color:#b8922a; border:1px solid rgba(184,146,42,.2);
+    }
+  </style>
+</head>
+<body class="bg-cream text-text-main font-sans">
+
+<!-- ════════ NAVBAR ════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center">
+      <img src="assets/images/logo/logo.png" alt="Renova Marketing Solutions" class="h-10 w-auto object-contain" />
+    </a>
+    <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
+      <li><a href="services.html"        class="text-gold font-semibold">Services</a></li>
+      <li><a href="packages.html"        class="text-text-sub hover:text-text-main transition-colors">Packages</a></li>
+      <li><a href="index.html#portfolio" class="text-text-sub hover:text-text-main transition-colors">Portfolio</a></li>
+      <li><a href="about.html"           class="text-text-sub hover:text-text-main transition-colors">About</a></li>
+      <li><a href="contact.html"         class="btn-gold px-5 py-2.5 rounded-sm text-sm text-white">Get Started</a></li>
+    </ul>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+      <span class="block w-6 h-0.5 bg-text-main"></span>
+      <span class="block w-6 h-0.5 bg-text-main"></span>
+      <span class="block w-4 h-0.5 bg-text-main"></span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-lg" style="display:none;">
+    <ul class="flex flex-col py-3 px-6">
+      <li><a href="services.html"        class="block py-3 text-sm font-semibold text-gold border-b border-gray-50">Services</a></li>
+      <li><a href="packages.html"        class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50">Packages</a></li>
+      <li><a href="index.html#portfolio" class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50">Portfolio</a></li>
+      <li><a href="about.html"           class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50">About</a></li>
+      <li class="pt-3"><a href="contact.html" class="btn-gold block text-center py-3 rounded-sm text-sm text-white">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- ════════ HERO ════════ -->
+<section class="svc-hero pt-40 pb-16 px-6 lg:px-12">
+  <div class="max-w-5xl mx-auto text-center relative z-10">
+    <div id="s-badge" class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-gold/20 bg-gold/5">
+      <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse inline-block"></span>
+      <span class="text-xs tracking-widest uppercase text-gold font-semibold">Full-Service Agency</span>
+    </div>
+    <h1 id="s-title" class="text-5xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-5">
+      Everything Your<br/>Business Needs to <span class="gold-text">Grow</span>
+    </h1>
+    <p id="s-sub" class="text-text-sub text-lg max-w-2xl mx-auto leading-relaxed mb-8">
+      From websites and mobile apps to SEO, branding, influencer campaigns, and digital billboards — all under one roof.
+    </p>
+    <div id="s-cta" class="flex flex-wrap items-center justify-center gap-4">
+      <a href="#services-grid" class="btn-gold px-8 py-4 rounded-sm text-sm uppercase tracking-widest text-white">Explore Services</a>
+      <a href="contact.html"   class="btn-outline px-8 py-4 rounded-sm text-sm uppercase tracking-widest">Get a Proposal</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ SERVICES GRID ════════ -->
+<section id="services-grid" class="py-20 px-6 lg:px-12 bg-off-white">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Filter bar -->
+    <div class="flex flex-wrap items-center justify-center gap-2 mb-12 reveal">
+      <button class="filter-btn active" data-filter="all">All Services</button>
+      <button class="filter-btn" data-filter="technology">Technology</button>
+      <button class="filter-btn" data-filter="marketing">Marketing</button>
+      <button class="filter-btn" data-filter="creative">Creative</button>
+    </div>
+
+    <!-- Cards grid -->
+    <div id="cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- 1 Website Design -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="technology">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0H3"/></svg>
+        </div>
+        <span class="cat-badge mb-3">Technology</span>
+        <h3 class="text-base font-black text-text-main mb-2">Website Design &amp; Development</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Modern, responsive, and high-converting websites that establish credibility and generate results.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Business &amp; Corporate Websites</div>
+          <div class="sub-item"><span class="sub-dot"></span>E-Commerce Stores</div>
+          <div class="sub-item"><span class="sub-dot"></span>Landing Pages</div>
+          <div class="sub-item"><span class="sub-dot"></span>Website Redesigns</div>
+          <div class="sub-item"><span class="sub-dot"></span>Maintenance &amp; Support</div>
+        </div>
+        <a href="#web-design" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+      <!-- 2 Web App -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="technology">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/></svg>
+        </div>
+        <span class="cat-badge mb-3">Technology</span>
+        <h3 class="text-base font-black text-text-main mb-2">Web Application Development</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Custom web applications that improve efficiency, automate workflows, and support business growth.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Custom Web Apps</div>
+          <div class="sub-item"><span class="sub-dot"></span>Customer Portals</div>
+          <div class="sub-item"><span class="sub-dot"></span>Booking Systems</div>
+          <div class="sub-item"><span class="sub-dot"></span>SaaS Platforms</div>
+          <div class="sub-item"><span class="sub-dot"></span>API Integrations</div>
+        </div>
+        <a href="#web-app" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+      <!-- 3 Android -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="technology">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>
+        </div>
+        <span class="cat-badge mb-3">Technology</span>
+        <h3 class="text-base font-black text-text-main mb-2">Android App Development</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Transform your business ideas into powerful Android applications that reach millions of users.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Custom Android Apps</div>
+          <div class="sub-item"><span class="sub-dot"></span>UI/UX Design</div>
+          <div class="sub-item"><span class="sub-dot"></span>App Testing</div>
+          <div class="sub-item"><span class="sub-dot"></span>Play Store Deployment</div>
+          <div class="sub-item"><span class="sub-dot"></span>Maintenance &amp; Updates</div>
+        </div>
+        <a href="#mobile-apps" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+      <!-- 4 iOS -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="technology">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3"/></svg>
+        </div>
+        <span class="cat-badge mb-3">Technology</span>
+        <h3 class="text-base font-black text-text-main mb-2">iOS App Development</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Create premium mobile experiences for iPhone and iPad users with polished, performant apps.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Custom iOS Apps</div>
+          <div class="sub-item"><span class="sub-dot"></span>UI/UX Design</div>
+          <div class="sub-item"><span class="sub-dot"></span>App Store Deployment</div>
+          <div class="sub-item"><span class="sub-dot"></span>Performance Optimization</div>
+          <div class="sub-item"><span class="sub-dot"></span>Ongoing Support</div>
+        </div>
+        <a href="#mobile-apps" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+      <!-- 5 SEO -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="marketing">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+        </div>
+        <span class="cat-badge mb-3" style="background:rgba(59,130,246,.08);color:#3b82f6;border-color:rgba(59,130,246,.2);">Marketing</span>
+        <h3 class="text-base font-black text-text-main mb-2">SEO Services</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Improve search rankings, increase website traffic, and generate more leads through strategic SEO.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Technical SEO</div>
+          <div class="sub-item"><span class="sub-dot"></span>On-Page &amp; Local SEO</div>
+          <div class="sub-item"><span class="sub-dot"></span>Keyword Research</div>
+          <div class="sub-item"><span class="sub-dot"></span>Content Optimization</div>
+          <div class="sub-item"><span class="sub-dot"></span>SEO Reporting</div>
+        </div>
+        <a href="#seo" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+      <!-- 6 Social Media -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="marketing">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
+        </div>
+        <span class="cat-badge mb-3" style="background:rgba(59,130,246,.08);color:#3b82f6;border-color:rgba(59,130,246,.2);">Marketing</span>
+        <h3 class="text-base font-black text-text-main mb-2">Social Media Marketing</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Grow your audience and strengthen brand presence through strategic social media marketing.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Facebook &amp; Instagram</div>
+          <div class="sub-item"><span class="sub-dot"></span>LinkedIn &amp; TikTok</div>
+          <div class="sub-item"><span class="sub-dot"></span>YouTube &amp; X</div>
+          <div class="sub-item"><span class="sub-dot"></span>Content Strategy</div>
+          <div class="sub-item"><span class="sub-dot"></span>Community Management</div>
+        </div>
+        <a href="#social-media" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+      <!-- 7 Influencer -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="marketing">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
+        </div>
+        <span class="cat-badge mb-3" style="background:rgba(59,130,246,.08);color:#3b82f6;border-color:rgba(59,130,246,.2);">Marketing</span>
+        <h3 class="text-base font-black text-text-main mb-2">Influencer Marketing</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Leverage our network of influencers across Canada to grow brand awareness and reach targeted audiences.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Influencer Outreach</div>
+          <div class="sub-item"><span class="sub-dot"></span>Campaign Management</div>
+          <div class="sub-item"><span class="sub-dot"></span>Sponsored Content</div>
+          <div class="sub-item"><span class="sub-dot"></span>Product Promotions</div>
+          <div class="sub-item"><span class="sub-dot"></span>Performance Tracking</div>
+        </div>
+        <a href="#influencer" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+      <!-- 8 Billboard -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="marketing">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg>
+        </div>
+        <span class="cat-badge mb-3" style="background:rgba(59,130,246,.08);color:#3b82f6;border-color:rgba(59,130,246,.2);">Marketing</span>
+        <h3 class="text-base font-black text-text-main mb-2">Digital Billboard Advertising</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Premium digital billboard placements across major cities in the United States and Canada.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Restaurants &amp; Retail</div>
+          <div class="sub-item"><span class="sub-dot"></span>Real Estate</div>
+          <div class="sub-item"><span class="sub-dot"></span>Events &amp; Healthcare</div>
+          <div class="sub-item"><span class="sub-dot"></span>USA &amp; Canada Coverage</div>
+          <div class="sub-item"><span class="sub-dot"></span>Major City Placements</div>
+        </div>
+        <a href="#billboard" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+      <!-- 9 Strategy -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="marketing">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+        </div>
+        <span class="cat-badge mb-3" style="background:rgba(59,130,246,.08);color:#3b82f6;border-color:rgba(59,130,246,.2);">Marketing</span>
+        <h3 class="text-base font-black text-text-main mb-2">Marketing Strategy &amp; Consulting</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Expert guidance to help businesses grow faster, market smarter, and outpace the competition.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Growth Strategy</div>
+          <div class="sub-item"><span class="sub-dot"></span>Lead Generation Planning</div>
+          <div class="sub-item"><span class="sub-dot"></span>Brand Positioning</div>
+          <div class="sub-item"><span class="sub-dot"></span>Customer Acquisition</div>
+          <div class="sub-item"><span class="sub-dot"></span>Marketing Audits</div>
+        </div>
+        <a href="#strategy" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+      <!-- 10 Branding -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="creative">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+        </div>
+        <span class="cat-badge mb-3" style="background:rgba(16,185,129,.08);color:#059669;border-color:rgba(16,185,129,.2);">Creative</span>
+        <h3 class="text-base font-black text-text-main mb-2">Graphic Design &amp; Branding</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Build a memorable brand identity through professional design that resonates with your audience.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Logo Design</div>
+          <div class="sub-item"><span class="sub-dot"></span>Brand Identity</div>
+          <div class="sub-item"><span class="sub-dot"></span>Marketing Materials</div>
+          <div class="sub-item"><span class="sub-dot"></span>Social Media Graphics</div>
+          <div class="sub-item"><span class="sub-dot"></span>Print &amp; Advertising</div>
+        </div>
+        <a href="#branding" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+      <!-- 11 Photography -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="creative">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/></svg>
+        </div>
+        <span class="cat-badge mb-3" style="background:rgba(16,185,129,.08);color:#059669;border-color:rgba(16,185,129,.2);">Creative</span>
+        <h3 class="text-base font-black text-text-main mb-2">Product &amp; Brand Photography</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Professional photography for e-commerce, social media, websites, catalogs, and corporate use.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Product Photography</div>
+          <div class="sub-item"><span class="sub-dot"></span>Corporate Headshots</div>
+          <div class="sub-item"><span class="sub-dot"></span>Office &amp; Team Shoots</div>
+          <div class="sub-item"><span class="sub-dot"></span>Brand Storytelling</div>
+          <div class="sub-item"><span class="sub-dot"></span>E-Commerce Imagery</div>
+        </div>
+        <a href="#photography" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+      <!-- 12 Video -->
+      <div class="svc-card reveal rounded-sm p-7 flex flex-col" data-cat="creative">
+        <div class="w-11 h-11 icon-box rounded-sm flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/></svg>
+        </div>
+        <span class="cat-badge mb-3" style="background:rgba(16,185,129,.08);color:#059669;border-color:rgba(16,185,129,.2);">Creative</span>
+        <h3 class="text-base font-black text-text-main mb-2">Video Production &amp; Content</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5 flex-1">Engaging video content that drives attention and builds customer engagement across platforms.</p>
+        <div class="space-y-1.5 mb-6">
+          <div class="sub-item"><span class="sub-dot"></span>Promotional Videos</div>
+          <div class="sub-item"><span class="sub-dot"></span>Social Media Reels</div>
+          <div class="sub-item"><span class="sub-dot"></span>Product Videos</div>
+          <div class="sub-item"><span class="sub-dot"></span>Corporate Videos</div>
+          <div class="sub-item"><span class="sub-dot"></span>Advertising Content</div>
+        </div>
+        <a href="#video" class="text-xs font-bold text-gold uppercase tracking-widest hover:underline">Learn More →</a>
+      </div>
+
+    </div><!-- /cards-grid -->
+  </div>
+</section>
+
+
+<!-- ════════ SERVICE DETAIL SECTIONS ════════ -->
+
+<!-- Web Design -->
+<div id="web-design" class="detail-section py-20 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <span class="cat-badge mb-4 inline-block">Technology</span>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main mb-4 leading-tight">Website Design <span class="gold-text">&amp; Development</span></h2>
+      <p class="text-text-sub text-sm leading-relaxed mb-6">We build modern, responsive, and high-converting websites that help businesses establish credibility and generate results. Every website we build is crafted for performance, SEO, and user experience.</p>
+      <div class="grid grid-cols-2 gap-3 mb-7">
+        <div class="sub-item"><span class="sub-dot"></span>Business Websites</div>
+        <div class="sub-item"><span class="sub-dot"></span>Corporate Websites</div>
+        <div class="sub-item"><span class="sub-dot"></span>E-Commerce Stores</div>
+        <div class="sub-item"><span class="sub-dot"></span>Landing Pages</div>
+        <div class="sub-item"><span class="sub-dot"></span>Website Redesigns</div>
+        <div class="sub-item"><span class="sub-dot"></span>Maintenance &amp; Support</div>
+      </div>
+      <a href="contact.html" class="btn-gold inline-block px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest text-white">Get a Quote</a>
+    </div>
+    <div class="detail-card reveal rounded-sm p-8 pl-11">
+      <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-4">Our Process</div>
+      <div class="space-y-5">
+        <div class="flex gap-4 items-start"><div class="process-dot">1</div><div><div class="text-sm font-bold text-text-main mb-1">Discovery &amp; Planning</div><div class="text-xs text-text-sub leading-relaxed">We learn your business, goals, and audience to build the right strategy.</div></div></div>
+        <div class="flex gap-4 items-start"><div class="process-dot">2</div><div><div class="text-sm font-bold text-text-main mb-1">Design &amp; Prototype</div><div class="text-xs text-text-sub leading-relaxed">Custom UI/UX designs crafted for your brand and optimized for conversions.</div></div></div>
+        <div class="flex gap-4 items-start"><div class="process-dot">3</div><div><div class="text-sm font-bold text-text-main mb-1">Development &amp; Testing</div><div class="text-xs text-text-sub leading-relaxed">Clean, fast, responsive code — tested across all devices and browsers.</div></div></div>
+        <div class="flex gap-4 items-start"><div class="process-dot">4</div><div><div class="text-sm font-bold text-text-main mb-1">Launch &amp; Support</div><div class="text-xs text-text-sub leading-relaxed">Smooth go-live with 1 month free support included on every project.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Web App -->
+<div id="web-app" class="detail-section py-20 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+    <div class="detail-card reveal rounded-sm p-8 pl-11 order-2 lg:order-1">
+      <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-4">What We Build</div>
+      <div class="space-y-3">
+        <div class="flex gap-3 items-start"><div class="w-7 h-7 icon-box rounded-sm flex items-center justify-center flex-shrink-0"><svg class="w-3.5 h-3.5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div><div class="text-sm font-bold text-text-main">Custom Web Apps</div><div class="text-xs text-text-sub">Tailored to your workflow, users, and scale.</div></div></div>
+        <div class="flex gap-3 items-start"><div class="w-7 h-7 icon-box rounded-sm flex items-center justify-center flex-shrink-0"><svg class="w-3.5 h-3.5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div><div class="text-sm font-bold text-text-main">Customer Portals</div><div class="text-xs text-text-sub">Secure portals for managing clients and data.</div></div></div>
+        <div class="flex gap-3 items-start"><div class="w-7 h-7 icon-box rounded-sm flex items-center justify-center flex-shrink-0"><svg class="w-3.5 h-3.5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div><div class="text-sm font-bold text-text-main">Booking Systems</div><div class="text-xs text-text-sub">Online reservation and scheduling platforms.</div></div></div>
+        <div class="flex gap-3 items-start"><div class="w-7 h-7 icon-box rounded-sm flex items-center justify-center flex-shrink-0"><svg class="w-3.5 h-3.5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div><div class="text-sm font-bold text-text-main">SaaS Platforms</div><div class="text-xs text-text-sub">Subscription-based software built for growth.</div></div></div>
+        <div class="flex gap-3 items-start"><div class="w-7 h-7 icon-box rounded-sm flex items-center justify-center flex-shrink-0"><svg class="w-3.5 h-3.5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div><div class="text-sm font-bold text-text-main">API Integrations</div><div class="text-xs text-text-sub">Connect your tools and automate operations.</div></div></div>
+      </div>
+    </div>
+    <div class="reveal order-1 lg:order-2">
+      <span class="cat-badge mb-4 inline-block">Technology</span>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main mb-4 leading-tight">Web Application <span class="gold-text">Development</span></h2>
+      <p class="text-text-sub text-sm leading-relaxed mb-6">Custom web applications designed to improve efficiency, automate workflows, and support business growth. We build scalable, secure, and user-friendly platforms that solve real business problems.</p>
+      <a href="contact.html" class="btn-gold inline-block px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest text-white">Discuss Your Project</a>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Apps -->
+<div id="mobile-apps" class="detail-section py-20 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10 reveal">
+      <span class="cat-badge mb-3 inline-block">Technology</span>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main">Mobile App <span class="gold-text">Development</span></h2>
+      <p class="text-text-sub text-sm mt-3 max-w-xl mx-auto">Native Android and iOS apps built to deliver seamless, high-performance user experiences.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="detail-card reveal rounded-sm p-8 pl-11">
+        <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-3">Android</div>
+        <h3 class="text-lg font-black text-text-main mb-2">Android App Development</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5">Transform your business ideas into powerful Android applications that reach millions of users on the world's most popular mobile platform.</p>
+        <div class="grid grid-cols-2 gap-2"><div class="sub-item"><span class="sub-dot"></span>Custom Android Apps</div><div class="sub-item"><span class="sub-dot"></span>UI/UX Design</div><div class="sub-item"><span class="sub-dot"></span>App Testing</div><div class="sub-item"><span class="sub-dot"></span>Play Store Deployment</div><div class="sub-item"><span class="sub-dot"></span>Maintenance &amp; Updates</div></div>
+      </div>
+      <div class="detail-card reveal rounded-sm p-8 pl-11">
+        <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-3">iOS</div>
+        <h3 class="text-lg font-black text-text-main mb-2">iOS App Development</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5">Create premium mobile experiences for iPhone and iPad users with polished, performant apps that meet Apple's highest standards.</p>
+        <div class="grid grid-cols-2 gap-2"><div class="sub-item"><span class="sub-dot"></span>Custom iOS Apps</div><div class="sub-item"><span class="sub-dot"></span>UI/UX Design</div><div class="sub-item"><span class="sub-dot"></span>App Store Deployment</div><div class="sub-item"><span class="sub-dot"></span>Performance Optimization</div><div class="sub-item"><span class="sub-dot"></span>Ongoing Support</div></div>
+      </div>
+    </div>
+    <div class="text-center mt-8 reveal"><a href="contact.html" class="btn-gold inline-block px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest text-white">Start Your App</a></div>
+  </div>
+</div>
+
+<!-- SEO -->
+<div id="seo" class="detail-section py-20 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <span class="cat-badge mb-4 inline-block" style="background:rgba(59,130,246,.08);color:#3b82f6;border-color:rgba(59,130,246,.2);">Marketing</span>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main mb-4 leading-tight">SEO <span class="gold-text">Services</span></h2>
+      <p class="text-text-sub text-sm leading-relaxed mb-6">Improve search rankings, increase website traffic, and generate more leads through strategic SEO. We combine technical expertise with content strategy to drive sustainable organic growth.</p>
+      <div class="grid grid-cols-2 gap-3 mb-7">
+        <div class="sub-item"><span class="sub-dot"></span>Technical SEO</div>
+        <div class="sub-item"><span class="sub-dot"></span>On-Page SEO</div>
+        <div class="sub-item"><span class="sub-dot"></span>Local SEO</div>
+        <div class="sub-item"><span class="sub-dot"></span>Keyword Research</div>
+        <div class="sub-item"><span class="sub-dot"></span>Content Optimization</div>
+        <div class="sub-item"><span class="sub-dot"></span>SEO Reporting</div>
+      </div>
+      <a href="contact.html" class="btn-gold inline-block px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest text-white">Grow My Rankings</a>
+    </div>
+    <div class="detail-card reveal rounded-sm p-8 pl-11">
+      <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-4">What You Get</div>
+      <div class="space-y-4">
+        <div><div class="text-sm font-black text-text-main mb-1">Higher Search Rankings</div><div class="text-xs text-text-sub">Rank for the keywords your customers are searching for.</div></div>
+        <div class="gold-divider"></div>
+        <div><div class="text-sm font-black text-text-main mb-1">More Organic Traffic</div><div class="text-xs text-text-sub">Drive consistent, high-quality traffic without paying per click.</div></div>
+        <div class="gold-divider"></div>
+        <div><div class="text-sm font-black text-text-main mb-1">Lead Generation</div><div class="text-xs text-text-sub">Turn visitors into customers with conversion-focused content.</div></div>
+        <div class="gold-divider"></div>
+        <div><div class="text-sm font-black text-text-main mb-1">Monthly Reports</div><div class="text-xs text-text-sub">Transparent reporting on rankings, traffic, and conversions.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Social Media -->
+<div id="social-media" class="detail-section py-20 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+    <div class="detail-card reveal rounded-sm p-8 pl-11 order-2 lg:order-1">
+      <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-4">Platforms We Manage</div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="flex items-center gap-2 text-sm font-semibold text-text-sub"><span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span>Facebook</div>
+        <div class="flex items-center gap-2 text-sm font-semibold text-text-sub"><span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span>Instagram</div>
+        <div class="flex items-center gap-2 text-sm font-semibold text-text-sub"><span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span>LinkedIn</div>
+        <div class="flex items-center gap-2 text-sm font-semibold text-text-sub"><span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span>TikTok</div>
+        <div class="flex items-center gap-2 text-sm font-semibold text-text-sub"><span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span>YouTube</div>
+        <div class="flex items-center gap-2 text-sm font-semibold text-text-sub"><span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span>X (Twitter)</div>
+      </div>
+      <div class="mt-6 pt-6 border-t border-mid-gray text-xs text-text-sub leading-relaxed">We create, schedule, and manage content across all major platforms — so you can focus on running your business.</div>
+    </div>
+    <div class="reveal order-1 lg:order-2">
+      <span class="cat-badge mb-4 inline-block" style="background:rgba(59,130,246,.08);color:#3b82f6;border-color:rgba(59,130,246,.2);">Marketing</span>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main mb-4 leading-tight">Social Media <span class="gold-text">Marketing</span></h2>
+      <p class="text-text-sub text-sm leading-relaxed mb-6">Grow your audience and strengthen your brand presence through strategic social media marketing. We handle everything from content creation to community management and paid campaigns.</p>
+      <a href="contact.html" class="btn-gold inline-block px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest text-white">Grow My Audience</a>
+    </div>
+  </div>
+</div>
+
+<!-- Branding -->
+<div id="branding" class="detail-section py-20 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <span class="cat-badge mb-4 inline-block" style="background:rgba(16,185,129,.08);color:#059669;border-color:rgba(16,185,129,.2);">Creative</span>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main mb-4 leading-tight">Graphic Design <span class="gold-text">&amp; Branding</span></h2>
+      <p class="text-text-sub text-sm leading-relaxed mb-6">Build a memorable brand identity through professional design that resonates with your audience and stands out in your market. From logo to full brand system — we build it all.</p>
+      <div class="grid grid-cols-2 gap-3 mb-7">
+        <div class="sub-item"><span class="sub-dot"></span>Logo Design</div>
+        <div class="sub-item"><span class="sub-dot"></span>Brand Identity</div>
+        <div class="sub-item"><span class="sub-dot"></span>Business Cards</div>
+        <div class="sub-item"><span class="sub-dot"></span>Letterhead &amp; Envelopes</div>
+        <div class="sub-item"><span class="sub-dot"></span>Social Media Graphics</div>
+        <div class="sub-item"><span class="sub-dot"></span>Advertising Creatives</div>
+      </div>
+      <a href="contact.html" class="btn-gold inline-block px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest text-white">Build My Brand</a>
+    </div>
+    <div class="detail-card reveal rounded-sm p-8 pl-11">
+      <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-4">Brand Identity Package</div>
+      <div class="space-y-3">
+        <div class="sub-item"><span class="sub-dot"></span>Primary &amp; Secondary Logo Variations</div>
+        <div class="sub-item"><span class="sub-dot"></span>Color Palette &amp; Typography</div>
+        <div class="sub-item"><span class="sub-dot"></span>Business Card Design</div>
+        <div class="sub-item"><span class="sub-dot"></span>Letterhead &amp; Email Signature</div>
+        <div class="sub-item"><span class="sub-dot"></span>Social Media Profile Branding</div>
+        <div class="sub-item"><span class="sub-dot"></span>Brand Style Guide</div>
+      </div>
+      <a href="packages.html" class="inline-block mt-6 text-xs font-bold text-gold uppercase tracking-widest hover:underline">View Branding Packages →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Influencer -->
+<div id="influencer" class="detail-section py-20 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+    <div class="detail-card reveal rounded-sm p-8 pl-11 order-2 lg:order-1">
+      <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-4">Why Influencer Marketing?</div>
+      <div class="space-y-4">
+        <div><div class="text-sm font-black text-text-main mb-1">Authentic Reach</div><div class="text-xs text-text-sub">Influencers connect with their audiences in ways traditional ads can't.</div></div>
+        <div class="gold-divider"></div>
+        <div><div class="text-sm font-black text-text-main mb-1">Targeted Audiences</div><div class="text-xs text-text-sub">We match your brand to the right creator and the right niche.</div></div>
+        <div class="gold-divider"></div>
+        <div><div class="text-sm font-black text-text-main mb-1">Canadian Network</div><div class="text-xs text-text-sub">Access our established network of vetted Canadian influencers.</div></div>
+        <div class="gold-divider"></div>
+        <div><div class="text-sm font-black text-text-main mb-1">Full Campaign Management</div><div class="text-xs text-text-sub">From outreach to reporting — we handle everything end-to-end.</div></div>
+      </div>
+    </div>
+    <div class="reveal order-1 lg:order-2">
+      <span class="cat-badge mb-4 inline-block" style="background:rgba(59,130,246,.08);color:#3b82f6;border-color:rgba(59,130,246,.2);">Marketing</span>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main mb-4 leading-tight">Influencer <span class="gold-text">Marketing</span></h2>
+      <p class="text-text-sub text-sm leading-relaxed mb-6">Leverage our network of influencers across Canada to increase brand awareness and reach highly targeted audiences. We manage every aspect of your influencer campaigns from start to finish.</p>
+      <div class="grid grid-cols-2 gap-3 mb-7">
+        <div class="sub-item"><span class="sub-dot"></span>Influencer Outreach</div>
+        <div class="sub-item"><span class="sub-dot"></span>Campaign Management</div>
+        <div class="sub-item"><span class="sub-dot"></span>Sponsored Content</div>
+        <div class="sub-item"><span class="sub-dot"></span>Product Promotions</div>
+        <div class="sub-item"><span class="sub-dot"></span>Performance Tracking</div>
+      </div>
+      <a href="contact.html" class="btn-gold inline-block px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest text-white">Launch a Campaign</a>
+    </div>
+  </div>
+</div>
+
+<!-- Billboard -->
+<div id="billboard" class="detail-section py-20 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <span class="cat-badge mb-4 inline-block" style="background:rgba(59,130,246,.08);color:#3b82f6;border-color:rgba(59,130,246,.2);">Marketing</span>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main mb-4 leading-tight">Digital Billboard <span class="gold-text">Advertising</span></h2>
+      <p class="text-text-sub text-sm leading-relaxed mb-6">Promote your business through premium digital billboard placements across major cities in the United States and Canada. Get your brand in front of thousands of people every day.</p>
+      <div class="text-xs uppercase tracking-widest text-text-muted font-semibold mb-3">Ideal For</div>
+      <div class="grid grid-cols-2 gap-3 mb-7">
+        <div class="sub-item"><span class="sub-dot"></span>Restaurants</div>
+        <div class="sub-item"><span class="sub-dot"></span>Retail Stores</div>
+        <div class="sub-item"><span class="sub-dot"></span>Real Estate</div>
+        <div class="sub-item"><span class="sub-dot"></span>Events</div>
+        <div class="sub-item"><span class="sub-dot"></span>Healthcare Providers</div>
+        <div class="sub-item"><span class="sub-dot"></span>Local Businesses</div>
+      </div>
+      <a href="contact.html" class="btn-gold inline-block px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest text-white">Book Billboard Space</a>
+    </div>
+    <div class="detail-card reveal rounded-sm p-8 pl-11">
+      <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-5">Coverage</div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="text-center p-4 bg-off-white rounded-sm"><div class="text-2xl font-black gold-text mb-1">USA</div><div class="text-xs text-text-muted uppercase tracking-widest">United States</div></div>
+        <div class="text-center p-4 bg-off-white rounded-sm"><div class="text-2xl font-black gold-text mb-1">CA</div><div class="text-xs text-text-muted uppercase tracking-widest">Canada</div></div>
+      </div>
+      <p class="text-xs text-text-sub mt-5 leading-relaxed">Premium placements in high-traffic urban locations across major cities — putting your brand in front of the right audience at the right time.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Photography & Video -->
+<div id="photography" class="detail-section py-20 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10 reveal">
+      <span class="cat-badge mb-3 inline-block" style="background:rgba(16,185,129,.08);color:#059669;border-color:rgba(16,185,129,.2);">Creative</span>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main">Photography <span class="gold-text">&amp; Video</span></h2>
+      <p class="text-text-sub text-sm mt-3 max-w-xl mx-auto">Professional visual content that elevates your brand and drives engagement across every channel.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="detail-card reveal rounded-sm p-8 pl-11">
+        <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-3">Photography</div>
+        <h3 class="text-lg font-black text-text-main mb-2">Product &amp; Brand Photography</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5">Professional photography for e-commerce, social media, websites, catalogs, and advertising campaigns. Also covering team photos, corporate headshots, office shoots, and brand storytelling.</p>
+        <div class="grid grid-cols-2 gap-2"><div class="sub-item"><span class="sub-dot"></span>Product Photography</div><div class="sub-item"><span class="sub-dot"></span>Corporate Headshots</div><div class="sub-item"><span class="sub-dot"></span>Office &amp; Team Shoots</div><div class="sub-item"><span class="sub-dot"></span>Brand Storytelling</div><div class="sub-item"><span class="sub-dot"></span>E-Commerce Imagery</div><div class="sub-item"><span class="sub-dot"></span>Catalog Shoots</div></div>
+      </div>
+      <div id="video" class="detail-card reveal rounded-sm p-8 pl-11">
+        <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-3">Video</div>
+        <h3 class="text-lg font-black text-text-main mb-2">Video Production &amp; Content</h3>
+        <p class="text-xs text-text-sub leading-relaxed mb-5">Engaging video content that drives attention and builds customer engagement across platforms. From promotional videos to social media reels and full corporate productions.</p>
+        <div class="grid grid-cols-2 gap-2"><div class="sub-item"><span class="sub-dot"></span>Promotional Videos</div><div class="sub-item"><span class="sub-dot"></span>Social Media Reels</div><div class="sub-item"><span class="sub-dot"></span>Product Videos</div><div class="sub-item"><span class="sub-dot"></span>Corporate Videos</div><div class="sub-item"><span class="sub-dot"></span>Advertising Content</div></div>
+      </div>
+    </div>
+    <div class="text-center mt-8 reveal"><a href="contact.html" class="btn-gold inline-block px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest text-white">Book a Shoot</a></div>
+  </div>
+</div>
+
+<!-- Strategy -->
+<div id="strategy" class="detail-section py-20 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+    <div class="detail-card reveal rounded-sm p-8 pl-11 order-2 lg:order-1">
+      <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-4">Consulting Services</div>
+      <div class="space-y-3">
+        <div class="sub-item"><span class="sub-dot"></span>Growth Strategy &amp; Roadmapping</div>
+        <div class="sub-item"><span class="sub-dot"></span>Lead Generation Planning</div>
+        <div class="sub-item"><span class="sub-dot"></span>Brand Positioning</div>
+        <div class="sub-item"><span class="sub-dot"></span>Customer Acquisition Strategies</div>
+        <div class="sub-item"><span class="sub-dot"></span>Marketing Audits &amp; Reviews</div>
+        <div class="sub-item"><span class="sub-dot"></span>Competitive Analysis</div>
+      </div>
+    </div>
+    <div class="reveal order-1 lg:order-2">
+      <span class="cat-badge mb-4 inline-block" style="background:rgba(59,130,246,.08);color:#3b82f6;border-color:rgba(59,130,246,.2);">Marketing</span>
+      <h2 class="text-3xl lg:text-4xl font-black text-text-main mb-4 leading-tight">Marketing Strategy <span class="gold-text">&amp; Consulting</span></h2>
+      <p class="text-text-sub text-sm leading-relaxed mb-6">Expert guidance to help businesses grow faster and market smarter. We analyze your current position, identify growth opportunities, and build a clear roadmap to achieve your goals.</p>
+      <a href="contact.html" class="btn-gold inline-block px-8 py-3.5 rounded-sm text-sm uppercase tracking-widest text-white">Book a Consultation</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════ CTA ════════ -->
+<section class="py-20 px-6 lg:px-12" style="background:linear-gradient(135deg,#111110 0%,#1a1a18 60%,#111110 100%);">
+  <div class="max-w-3xl mx-auto text-center reveal">
+    <div class="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full border border-gold/25 bg-gold/8">
+      <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse inline-block"></span>
+      <span class="text-xs tracking-widest uppercase text-gold font-semibold">Ready to Start?</span>
+    </div>
+    <h2 class="text-3xl lg:text-5xl font-black text-white mb-4 leading-tight">Not Sure Which Service<br/><span class="gold-text">You Need?</span></h2>
+    <p class="text-gray-400 text-base leading-relaxed mb-8 max-w-xl mx-auto">Tell us about your business and goals — we'll recommend the right combination of services and prepare a tailored proposal at no charge.</p>
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="contact.html"  class="btn-gold px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-bold text-white">Get a Free Proposal</a>
+      <a href="packages.html" class="inline-block px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-semibold text-white border border-white/20 hover:border-gold/50 hover:text-gold transition-all duration-200">View Packages</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ FOOTER ════════ -->
+<footer class="py-12 px-6 lg:px-12 border-t border-mid-gray bg-off-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <a href="index.html" class="inline-block mb-4">
+          <img src="assets/images/logo/logo.png" alt="Renova Marketing Solutions" class="h-9 w-auto object-contain" />
+        </a>
+        <p class="text-text-sub text-sm leading-relaxed max-w-xs">A full-service marketing and technology agency helping businesses build stronger brands across the USA and Canada.</p>
+        <p class="text-text-muted text-xs mt-3 italic">Creative Solutions. Measurable Results. Lasting Growth.</p>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4">Services</div>
+        <ul class="space-y-2">
+          <li><a href="#web-design"   class="text-xs text-text-sub hover:text-gold transition-colors">Website Development</a></li>
+          <li><a href="#web-app"      class="text-xs text-text-sub hover:text-gold transition-colors">Web Applications</a></li>
+          <li><a href="#mobile-apps"  class="text-xs text-text-sub hover:text-gold transition-colors">Mobile Apps</a></li>
+          <li><a href="#seo"          class="text-xs text-text-sub hover:text-gold transition-colors">SEO Services</a></li>
+          <li><a href="#branding"     class="text-xs text-text-sub hover:text-gold transition-colors">Branding &amp; Design</a></li>
+          <li><a href="#influencer"   class="text-xs text-text-sub hover:text-gold transition-colors">Influencer Marketing</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4">Company</div>
+        <ul class="space-y-2">
+          <li><a href="about.html"           class="text-xs text-text-sub hover:text-gold transition-colors">About Us</a></li>
+          <li><a href="packages.html"        class="text-xs text-text-sub hover:text-gold transition-colors">Packages</a></li>
+          <li><a href="index.html#portfolio" class="text-xs text-text-sub hover:text-gold transition-colors">Portfolio</a></li>
+          <li><a href="contact.html"         class="text-xs text-text-sub hover:text-gold transition-colors">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="gold-divider mb-6"></div>
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-text-muted">&copy; 2025 Renova Marketing Solutions. All rights reserved.</p>
+      <p class="text-xs text-text-muted">USA &amp; Canada</p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Custom cursor ── */
+(function(){
+  const dot=document.createElement('div'), ring=document.createElement('div');
+  dot.id='cursor-dot'; ring.id='cursor-ring';
+  Object.assign(dot.style,{position:'fixed',width:'6px',height:'6px',borderRadius:'50%',background:'#b8922a',pointerEvents:'none',zIndex:'9999',transform:'translate(-50%,-50%)',top:'0',left:'0'});
+  Object.assign(ring.style,{position:'fixed',width:'32px',height:'32px',borderRadius:'50%',border:'1.5px solid rgba(184,146,42,0.5)',pointerEvents:'none',zIndex:'9998',transform:'translate(-50%,-50%)',top:'0',left:'0',transition:'width .3s,height .3s,border-color .3s'});
+  document.body.appendChild(dot); document.body.appendChild(ring);
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;gsap.set(dot,{x:mx,y:my});});
+  (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;gsap.set(ring,{x:rx,y:ry});requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button,.svc-card,.filter-btn').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(184,146,42,0.9)';});
+    el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(184,146,42,0.5)';});
+  });
+})();
+
+/* ── Navbar ── */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('nav-scrolled',window.scrollY>60);},{passive:true});
+document.getElementById('hamburger').addEventListener('click',e=>{
+  e.stopPropagation();
+  const m=document.getElementById('mobile-menu');
+  m.style.display=m.style.display==='block'?'none':'block';
+});
+document.addEventListener('click',e=>{if(!navbar.contains(e.target))document.getElementById('mobile-menu').style.display='none';});
+
+/* ── Hero entrance ── */
+gsap.set(['#s-badge','#s-title','#s-sub','#s-cta'],{opacity:0,y:28});
+gsap.timeline({delay:.1,defaults:{ease:'expo.out'}})
+  .to('#s-badge',{opacity:1,y:0,duration:.7})
+  .to('#s-title',{opacity:1,y:0,duration:.9},'-=.4')
+  .to('#s-sub',  {opacity:1,y:0,duration:.75},'-=.5')
+  .to('#s-cta',  {opacity:1,y:0,duration:.65},'-=.4');
+
+/* ── Filter ── */
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter=btn.dataset.filter;
+    document.querySelectorAll('.svc-card').forEach((card,i)=>{
+      const show = filter==='all' || card.dataset.cat===filter;
+      if(show){
+        card.style.display='flex';
+        gsap.fromTo(card,{opacity:0,y:20,scale:.97},{opacity:1,y:0,scale:1,duration:.5,delay:i*.04,ease:'expo.out'});
+      } else {
+        gsap.to(card,{opacity:0,scale:.95,duration:.25,ease:'power2.in',onComplete:()=>{ card.style.display='none'; }});
+      }
+    });
+  });
+});
+
+/* ── Scroll reveals ── */
+gsap.utils.toArray('.reveal').forEach((el,i)=>{
+  gsap.set(el,{opacity:0,y:36});
+  ScrollTrigger.create({
+    trigger:el, start:'top 90%', once:true,
+    onEnter:()=>gsap.to(el,{opacity:1,y:0,duration:.8,delay:(i%4)*.06,ease:'expo.out'}),
+  });
+});
+
+gsap.utils.toArray('.gold-divider').forEach(el=>{
+  gsap.set(el,{scaleX:0,transformOrigin:'left center'});
+  ScrollTrigger.create({trigger:el,start:'top 93%',once:true,
+    onEnter:()=>gsap.to(el,{scaleX:1,duration:1,ease:'expo.out'}),
+  });
+});
+
+/* ── Service card 3D tilt ── */
+document.querySelectorAll('.svc-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    gsap.to(card,{rotateY:x*7,rotateX:-y*7,duration:.4,ease:'power2.out',transformPerspective:900});
+  });
+  card.addEventListener('mouseleave',()=>gsap.to(card,{rotateY:0,rotateX:0,duration:.7,ease:'elastic.out(1,.6)'}));
+});
+
+/* ── Magnetic buttons ── */
+document.querySelectorAll('.btn-gold,.btn-outline').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.22,y:(e.clientY-r.top-r.height/2)*.18,duration:.4,ease:'power2.out'});
+  });
+  btn.addEventListener('mouseleave',()=>gsap.to(btn,{x:0,y:0,duration:.6,ease:'elastic.out(1,.5)'}));
+});
+
+/* ── Smooth scroll for anchor links ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target=document.querySelector(a.getAttribute('href'));
+    if(target){ e.preventDefault(); const top=target.getBoundingClientRect().top+window.scrollY-80; window.scrollTo({top,behavior:'smooth'}); }
+  });
+});
+
+/* ── Footer ── */
+gsap.from('footer',{opacity:0,y:24,duration:.9,ease:'expo.out',scrollTrigger:{trigger:'footer',start:'top 95%',once:true}});
+</script>
+</body>
+</html>
