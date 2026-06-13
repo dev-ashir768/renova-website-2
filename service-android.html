@@ -10,7 +10,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/components.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -114,90 +115,7 @@
     </style>
   </head>
   <body class="bg-cream text-text-main font-sans">
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 px-6 lg:px-12">
-      <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="index.html"
-          ><img
-            src="assets/images/logo/logo.png"
-            alt="Renova"
-            class="h-10 w-auto object-contain"
-        /></a>
-        <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
-          <li>
-            <a href="services.html" class="text-gold font-semibold">Services</a>
-          </li>
-          <li>
-            <a
-              href="packages.html"
-              class="text-text-sub hover:text-text-main transition-colors"
-              >Packages</a
-            >
-          </li>
-          <li>
-            <a
-              href="index.html#portfolio"
-              class="text-text-sub hover:text-text-main transition-colors"
-              >Portfolio</a
-            >
-          </li>
-          <li>
-            <a
-              href="about.html"
-              class="text-text-sub hover:text-text-main transition-colors"
-              >About</a
-            >
-          </li>
-          <li>
-            <a
-              href="contact.html"
-              class="btn-gold px-5 py-2.5 rounded-sm text-sm text-white"
-              >Get Started</a
-            >
-          </li>
-        </ul>
-        <button id="hamburger" class="lg:hidden p-2">
-          <span class="block w-6 h-0.5 bg-text-main mb-1.5"></span
-          ><span class="block w-6 h-0.5 bg-text-main mb-1.5"></span
-          ><span class="block w-4 h-0.5 bg-text-main"></span>
-        </button>
-      </div>
-      <div
-        id="mobile-menu"
-        class="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-lg"
-        style="display: none"
-      >
-        <ul class="flex flex-col py-3 px-6">
-          <li>
-            <a
-              href="services.html"
-              class="block py-3 text-sm font-semibold text-gold border-b border-gray-50"
-              >Services</a
-            >
-          </li>
-          <li>
-            <a
-              href="packages.html"
-              class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50"
-              >Packages</a
-            >
-          </li>
-          <li>
-            <a
-              href="about.html"
-              class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50"
-              >About</a
-            >
-          </li>
-          <li class="pt-3">
-            <a
-              href="contact.html"
-              class="btn-gold block text-center py-3 rounded-sm text-sm text-white"
-              >Get Started</a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div id="navbar-placeholder"></div>
 
     <section class="hero-bg pt-40 pb-20 px-6 lg:px-12">
       <div class="max-w-5xl mx-auto relative z-10">
@@ -601,112 +519,7 @@
       </div>
     </section>
 
-    <footer class="py-12 px-6 lg:px-12 border-t border-mid-gray bg-off-white">
-      <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
-          <div class="md:col-span-2">
-            <a href="index.html" class="inline-block mb-4"
-              ><img
-                src="assets/images/logo/logo.png"
-                alt="Renova"
-                class="h-9 w-auto object-contain"
-            /></a>
-            <p class="text-text-sub text-sm leading-relaxed max-w-xs">
-              A full-service marketing and technology agency helping businesses
-              build stronger brands across the USA and Canada.
-            </p>
-          </div>
-          <div>
-            <div
-              class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4"
-            >
-              Services
-            </div>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="service-web-design.html"
-                  class="text-xs text-text-sub hover:text-gold transition-colors"
-                  >Website Development</a
-                >
-              </li>
-              <li>
-                <a
-                  href="service-web-app.html"
-                  class="text-xs text-text-sub hover:text-gold transition-colors"
-                  >Web Applications</a
-                >
-              </li>
-              <li>
-                <a href="service-android.html" class="text-xs text-gold"
-                  >Android Apps</a
-                >
-              </li>
-              <li>
-                <a
-                  href="service-ios.html"
-                  class="text-xs text-text-sub hover:text-gold transition-colors"
-                  >iOS Apps</a
-                >
-              </li>
-              <li>
-                <a
-                  href="service-seo.html"
-                  class="text-xs text-text-sub hover:text-gold transition-colors"
-                  >SEO Services</a
-                >
-              </li>
-              <li>
-                <a
-                  href="service-branding.html"
-                  class="text-xs text-text-sub hover:text-gold transition-colors"
-                  >Branding &amp; Design</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <div
-              class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4"
-            >
-              Company
-            </div>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="about.html"
-                  class="text-xs text-text-sub hover:text-gold transition-colors"
-                  >About Us</a
-                >
-              </li>
-              <li>
-                <a
-                  href="packages.html"
-                  class="text-xs text-text-sub hover:text-gold transition-colors"
-                  >Packages</a
-                >
-              </li>
-              <li>
-                <a
-                  href="contact.html"
-                  class="text-xs text-text-sub hover:text-gold transition-colors"
-                  >Contact Us</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="gold-divider mb-6"></div>
-        <div
-          class="flex flex-col sm:flex-row items-center justify-between gap-3"
-        >
-          <p class="text-xs text-text-muted">
-            &copy; 2025 Renova Marketing Solutions. All rights reserved.
-          </p>
-          <p class="text-xs text-text-muted">USA &amp; Canada</p>
-        </div>
-      </div>
-    </footer>
+    <div id="footer-placeholder"></div>
     <script>
       gsap.registerPlugin(ScrollTrigger);
       (function () {
@@ -769,21 +582,7 @@
           });
         });
       })();
-      const navbar = document.getElementById("navbar");
-      window.addEventListener(
-        "scroll",
-        () => navbar.classList.toggle("nav-scrolled", window.scrollY > 60),
-        { passive: true },
-      );
-      document.getElementById("hamburger").addEventListener("click", (e) => {
-        e.stopPropagation();
-        const m = document.getElementById("mobile-menu");
-        m.style.display = m.style.display === "block" ? "none" : "block";
-      });
-      document.addEventListener("click", (e) => {
-        if (!navbar.contains(e.target))
-          document.getElementById("mobile-menu").style.display = "none";
-      });
+      
       gsap.set(["#h-badge", "#h-title", "#h-sub", "#h-cta"], {
         opacity: 0,
         y: 28,
@@ -848,13 +647,7 @@
           icon.textContent = open ? "+" : "−";
         });
       });
-      gsap.from("footer", {
-        opacity: 0,
-        y: 24,
-        duration: 0.9,
-        ease: "expo.out",
-        scrollTrigger: { trigger: "footer", start: "top 95%", once: true },
-      });
+      
     </script>
   </body>
 </html>

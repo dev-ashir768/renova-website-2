@@ -14,110 +14,7 @@ function smoothScrollTo(targetId, offset = 70) {
 }
 
 
-/* ── 2. CUSTOM CURSOR ────────────────────────────────────────────────── */
-const cursorDot  = document.createElement('div');
-const cursorRing = document.createElement('div');
-cursorDot.id  = 'cursor-dot';
-cursorRing.id = 'cursor-ring';
-Object.assign(cursorDot.style, {
-  position:'fixed', width:'6px', height:'6px', borderRadius:'50%',
-  background:'#b8922a', pointerEvents:'none', zIndex:'9999',
-  transform:'translate(-50%,-50%)', top:'0', left:'0',
-});
-Object.assign(cursorRing.style, {
-  position:'fixed', width:'32px', height:'32px', borderRadius:'50%',
-  border:'1.5px solid rgba(184,146,42,0.5)', pointerEvents:'none',
-  zIndex:'9998', transform:'translate(-50%,-50%)', top:'0', left:'0',
-  transition:'width 0.3s, height 0.3s, border-color 0.3s',
-});
-document.body.appendChild(cursorDot);
-document.body.appendChild(cursorRing);
-
-let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  gsap.set(cursorDot, { x: mouseX, y: mouseY });
-});
-
-(function animateRing() {
-  ringX += (mouseX - ringX) * 0.1;
-  ringY += (mouseY - ringY) * 0.1;
-  gsap.set(cursorRing, { x: ringX, y: ringY });
-  requestAnimationFrame(animateRing);
-})();
-
-document.querySelectorAll('a, button, .service-card, .package-card, .portfolio-item, .faq-trigger').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cursorRing.style.width = '52px';
-    cursorRing.style.height = '52px';
-    cursorRing.style.borderColor = 'rgba(184,146,42,0.9)';
-  });
-  el.addEventListener('mouseleave', () => {
-    cursorRing.style.width = '32px';
-    cursorRing.style.height = '32px';
-    cursorRing.style.borderColor = 'rgba(184,146,42,0.5)';
-  });
-});
-
-
-/* ── 3. NAVBAR ────────────────────────────────────────────────────────── */
-const navbar = document.getElementById('navbar');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 60) navbar.classList.add('nav-scrolled');
-  else                      navbar.classList.remove('nav-scrolled');
-}, { passive: true });
-
-// Active nav link
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('ul a[href^="#"]');
-
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(sec => {
-    if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
-  });
-  navLinks.forEach(a => {
-    a.style.color = a.getAttribute('href') === `#${current}` ? '#b8922a' : '';
-  });
-}, { passive: true });
-
-// Mobile menu
-document.getElementById('hamburger').addEventListener('click', (e) => {
-  e.stopPropagation();
-  document.getElementById('mobile-menu').classList.toggle('open');
-});
-document.addEventListener('click', (e) => {
-  if (!navbar.contains(e.target)) {
-    document.getElementById('mobile-menu').classList.remove('open');
-  }
-});
-document.querySelectorAll('.mobile-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    document.getElementById('mobile-menu').classList.remove('open');
-    const target = link.getAttribute('href');
-    if (target) setTimeout(() => smoothScrollTo(target), 80);
-  });
-});
-
-// Desktop anchor links
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  if (!a.classList.contains('mobile-link')) {
-    a.addEventListener('click', (e) => {
-      const target = a.getAttribute('href');
-      if (target && target.length > 1) {
-        e.preventDefault();
-        smoothScrollTo(target);
-      }
-    });
-  }
-});
-
-
-/* ── 4. HERO ANIMATION ────────────────────────────────────────────────── */
+/* ── 2. HERO ANIMATION ────────────────────────────────────────────────── */
 (function initHero() {
   const h1Words = document.querySelectorAll('#hero-headline .hero-word span');
 
@@ -387,10 +284,4 @@ document.querySelectorAll('.faq-trigger').forEach(trigger => {
 })();
 
 
-/* ── 12. FOOTER REVEAL ───────────────────────────────────────────────── */
-gsap.from('footer', {
-  opacity: 0, y: 24,
-  duration: 0.9,
-  ease: 'expo.out',
-  scrollTrigger: { trigger: 'footer', start: 'top 95%', once: true },
-});
+/* ── 12. FOOTER REVEAL — handled by components.js ── */
