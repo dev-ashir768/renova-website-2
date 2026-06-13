@@ -264,22 +264,45 @@ document.querySelectorAll('.faq-trigger').forEach(trigger => {
       return;
     }
 
-    const btn = form.querySelector('button[type="submit"]');
+    const btn  = form.querySelector('button[type="submit"]');
     const orig = btn.textContent;
     btn.textContent = 'Sending…';
     btn.disabled = true;
 
-    setTimeout(() => {
-      btn.textContent = 'Message Sent ✓';
-      btn.style.background = 'linear-gradient(135deg,#2d8a4e,#3aad64)';
-      gsap.fromTo(btn, { scale: 0.97 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' });
-      form.reset();
-      setTimeout(() => {
-        btn.textContent = orig;
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 4500);
-    }, 700);
+    const fd = new FormData(form);
+    fd.append('page', form.dataset.page || 'contact');
+    // map field names
+    const nameEl    = form.querySelector('#c-name');
+    const emailEl   = form.querySelector('#c-email');
+    const phoneEl   = form.querySelector('#c-phone');
+    const projectEl = form.querySelector('#c-project');
+    const messageEl = form.querySelector('#c-message');
+    if (nameEl)    fd.set('name',    nameEl.value);
+    if (emailEl)   fd.set('email',   emailEl.value);
+    if (phoneEl)   fd.set('phone',   phoneEl.value);
+    if (projectEl) fd.set('project', projectEl.options[projectEl.selectedIndex]?.text || '');
+    if (messageEl) fd.set('message', messageEl.value);
+
+    fetch('submit_form.php', { method: 'POST', body: fd })
+      .then(r => r.json())
+      .then(res => {
+        btn.textContent = res.success ? 'Message Sent ✓' : 'Error — Try Again';
+        btn.style.background = res.success
+          ? 'linear-gradient(135deg,#2d8a4e,#3aad64)'
+          : 'linear-gradient(135deg,#c0392b,#e74c3c)';
+        gsap.fromTo(btn, { scale: 0.97 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' });
+        if (res.success) form.reset();
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 4500);
+      })
+      .catch(() => {
+        btn.textContent = 'Error — Try Again';
+        btn.style.background = 'linear-gradient(135deg,#c0392b,#e74c3c)';
+        setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.disabled = false; }, 3000);
+      });
   });
 })();
 

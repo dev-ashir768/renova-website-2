@@ -595,7 +595,7 @@
                 <div class="step-dot" id="dot-3">3</div>
               </div>
 
-              <form id="contact-form" novalidate>
+              <form id="contact-form" novalidate data-page="contact">
                 <!-- ── STEP 1: Service Selection ── -->
                 <div class="form-step active" id="step-1">
                   <h2 class="text-2xl font-black text-text-main mb-1">
@@ -1502,21 +1502,39 @@
         });
         if (!valid) { Validate.shakeBtn("#submit-btn"); return; }
 
-        const btn = document.getElementById("submit-btn");
+        const btn  = document.getElementById("submit-btn");
+        const form = document.getElementById("contact-form");
         btn.textContent = "Sending…";
         btn.disabled = true;
-        setTimeout(() => {
-          document.getElementById("step-3").classList.remove("active");
-          const success = document.getElementById("step-success");
-          success.classList.add("active");
-          gsap.fromTo(success, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" });
-          [1, 2, 3].forEach((s) => {
-            const dot = document.getElementById("dot-" + s);
-            dot.classList.remove("active"); dot.classList.add("done"); dot.innerHTML = "✓";
-            const line = document.getElementById("line-" + s);
-            if (line) line.classList.add("done");
+
+        // Collect all form data
+        const fd = new FormData();
+        fd.append('page',    'contact');
+        fd.append('name',    document.getElementById('f-name')?.value    || document.getElementById('sum-name')?.textContent  || '');
+        fd.append('email',   document.getElementById('f-email')?.value   || document.getElementById('sum-email')?.textContent || '');
+        fd.append('phone',   document.getElementById('f-phone')?.value   || '');
+        fd.append('project', document.getElementById('sum-service')?.textContent || document.getElementById('f-service')?.value || '');
+        fd.append('message', document.getElementById('f-message')?.value || '');
+
+        fetch('submit_form.php', { method: 'POST', body: fd })
+          .then(r => r.json())
+          .then(() => {
+            document.getElementById("step-3").classList.remove("active");
+            const success = document.getElementById("step-success");
+            success.classList.add("active");
+            gsap.fromTo(success, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" });
+            [1, 2, 3].forEach((s) => {
+              const dot = document.getElementById("dot-" + s);
+              dot.classList.remove("active"); dot.classList.add("done"); dot.innerHTML = "✓";
+              const line = document.getElementById("line-" + s);
+              if (line) line.classList.add("done");
+            });
+          })
+          .catch(() => {
+            btn.textContent = "Error — Try Again";
+            btn.style.background = "linear-gradient(135deg,#c0392b,#e74c3c)";
+            setTimeout(() => { btn.textContent = "Submit"; btn.style.background = ""; btn.disabled = false; }, 3000);
           });
-        }, 800);
       });
 
       /* ── FAQ ── */

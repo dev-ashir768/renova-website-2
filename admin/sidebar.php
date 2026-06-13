@@ -6,6 +6,7 @@
   <nav>
     <a href="index.php" <?= basename($_SERVER['PHP_SELF'])==='index.php' ? 'class="active"' : '' ?>>📁 Portfolio Items</a>
     <a href="add.php"   <?= basename($_SERVER['PHP_SELF'])==='add.php'   ? 'class="active"' : '' ?>>➕ Add New</a>
+    <a href="submissions.php" <?= basename($_SERVER['PHP_SELF'])==='submissions.php' ? 'class="active"' : '' ?>>📩 Form Submissions</a>
     <a href="../portfolio.php" target="_blank">🌐 View Site</a>
   </nav>
   <div class="sidebar-bottom">
