@@ -93,9 +93,8 @@
         <div class="mt-6 pt-6 border-t border-mid-gray">
           <div class="text-xs uppercase tracking-widest text-text-muted font-bold mb-3">Follow Us</div>
           <div class="flex gap-3">
-            <a href="#" class="w-7 h-7 rounded-sm border border-mid-gray flex items-center justify-center hover:border-gold hover:text-gold transition-colors text-text-muted text-xs font-bold">f</a>
-            <a href="#" class="w-7 h-7 rounded-sm border border-mid-gray flex items-center justify-center hover:border-gold hover:text-gold transition-colors text-text-muted text-xs font-bold">in</a>
-            <a href="#" class="w-7 h-7 rounded-sm border border-mid-gray flex items-center justify-center hover:border-gold hover:text-gold transition-colors text-text-muted text-xs">◎</a>
+            <a href="https://www.facebook.com/share/1JhHDughpX/?mibextid=wwXIfr" target="_blank" rel="noopener" class="w-7 h-7 rounded-sm border border-mid-gray flex items-center justify-center hover:border-gold hover:text-gold transition-colors text-text-muted text-xs font-bold">f</a>
+            <a href="https://www.instagram.com/renova_marketingsolutions?igsh=ajMzemdnejZ2ZnV5" target="_blank" rel="noopener" class="w-7 h-7 rounded-sm border border-mid-gray flex items-center justify-center hover:border-gold hover:text-gold transition-colors text-text-muted text-xs">◎</a>
           </div>
         </div>
       </div>
