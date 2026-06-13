@@ -1,129 +1,843 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Android App Development — Renova Marketing Solutions</title>
-  <link rel="icon" type="image/png" href="assets/images/logo/favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={theme:{extend:{colors:{gold:'#b8922a','gold-light':'#d4a93a','gold-dark':'#8a6b1e',cream:'#fafaf8','off-white':'#f5f4f0','mid-gray':'#e0dfd9','text-main':'#111110','text-sub':'#5a5a55','text-muted':'#9a9a94'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}}</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <style>
-    .hero-bg{background:#fafaf8;position:relative;overflow:hidden}.hero-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(184,146,42,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(184,146,42,.045) 1px,transparent 1px);background-size:80px 80px}.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(212,169,58,.09) 0%,transparent 70%)}
-    .feat-card{background:#fff;border:1px solid #e8e7e2;border-radius:2px;padding:28px;transition:border-color .3s,box-shadow .3s,transform .3s;position:relative;overflow:hidden}.feat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#b8922a,#d4a93a);transform:scaleX(0);transform-origin:left;transition:transform .35s}.feat-card:hover::after{transform:scaleX(1)}.feat-card:hover{border-color:rgba(184,146,42,.35);box-shadow:0 8px 30px rgba(184,146,42,.1);transform:translateY(-4px)}
-    .step-num{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#b8922a,#d4a93a);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0}
-    .faq-item{border-bottom:1px solid #e8e7e2;cursor:pointer}.faq-answer{display:none}
-  </style>
-</head>
-<body class="bg-cream text-text-main font-sans">
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 px-6 lg:px-12">
-  <div class="max-w-7xl mx-auto flex items-center justify-between">
-    <a href="index.html"><img src="assets/images/logo/logo.png" alt="Renova" class="h-10 w-auto object-contain" /></a>
-    <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
-      <li><a href="services.html" class="text-gold font-semibold">Services</a></li>
-      <li><a href="packages.html" class="text-text-sub hover:text-text-main transition-colors">Packages</a></li>
-      <li><a href="index.html#portfolio" class="text-text-sub hover:text-text-main transition-colors">Portfolio</a></li>
-      <li><a href="about.html" class="text-text-sub hover:text-text-main transition-colors">About</a></li>
-      <li><a href="contact.html" class="btn-gold px-5 py-2.5 rounded-sm text-sm text-white">Get Started</a></li>
-    </ul>
-    <button id="hamburger" class="lg:hidden p-2"><span class="block w-6 h-0.5 bg-text-main mb-1.5"></span><span class="block w-6 h-0.5 bg-text-main mb-1.5"></span><span class="block w-4 h-0.5 bg-text-main"></span></button>
-  </div>
-  <div id="mobile-menu" class="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-lg" style="display:none">
-    <ul class="flex flex-col py-3 px-6"><li><a href="services.html" class="block py-3 text-sm font-semibold text-gold border-b border-gray-50">Services</a></li><li><a href="packages.html" class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50">Packages</a></li><li><a href="about.html" class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50">About</a></li><li class="pt-3"><a href="contact.html" class="btn-gold block text-center py-3 rounded-sm text-sm text-white">Get Started</a></li></ul>
-  </div>
-</nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Android App Development — Renova Marketing Solutions</title>
+    <link rel="icon" type="image/png" href="assets/images/logo/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config={theme:{extend:{colors:{gold:'#b8922a','gold-light':'#d4a93a','gold-dark':'#8a6b1e',cream:'#fafaf8','off-white':'#f5f4f0','mid-gray':'#e0dfd9','text-main':'#111110','text-sub':'#5a5a55','text-muted':'#9a9a94'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}}
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+      .hero-bg {
+        background: #fafaf8;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(184, 146, 42, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(184, 146, 42, 0.045) 1px, transparent 1px);
+        background-size: 80px 80px;
+      }
+      .hero-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 80% 55% at 50% 0%,
+          rgba(212, 169, 58, 0.09) 0%,
+          transparent 70%
+        );
+      }
+      .feat-card {
+        background: #fff;
+        border: 1px solid #e8e7e2;
+        border-radius: 2px;
+        padding: 28px;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s,
+          transform 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .feat-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #b8922a, #d4a93a);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s;
+      }
+      .feat-card:hover::after {
+        transform: scaleX(1);
+      }
+      .feat-card:hover {
+        border-color: rgba(184, 146, 42, 0.35);
+        box-shadow: 0 8px 30px rgba(184, 146, 42, 0.1);
+        transform: translateY(-4px);
+      }
+      .step-num {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #b8922a, #d4a93a);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 900;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .faq-item {
+        border-bottom: 1px solid #e8e7e2;
+        cursor: pointer;
+      }
+      .faq-answer {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="bg-cream text-text-main font-sans">
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 px-6 lg:px-12">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <a href="index.html"
+          ><img
+            src="assets/images/logo/logo.png"
+            alt="Renova"
+            class="h-10 w-auto object-contain"
+        /></a>
+        <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
+          <li>
+            <a href="services.html" class="text-gold font-semibold">Services</a>
+          </li>
+          <li>
+            <a
+              href="packages.html"
+              class="text-text-sub hover:text-text-main transition-colors"
+              >Packages</a
+            >
+          </li>
+          <li>
+            <a
+              href="index.html#portfolio"
+              class="text-text-sub hover:text-text-main transition-colors"
+              >Portfolio</a
+            >
+          </li>
+          <li>
+            <a
+              href="about.html"
+              class="text-text-sub hover:text-text-main transition-colors"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="contact.html"
+              class="btn-gold px-5 py-2.5 rounded-sm text-sm text-white"
+              >Get Started</a
+            >
+          </li>
+        </ul>
+        <button id="hamburger" class="lg:hidden p-2">
+          <span class="block w-6 h-0.5 bg-text-main mb-1.5"></span
+          ><span class="block w-6 h-0.5 bg-text-main mb-1.5"></span
+          ><span class="block w-4 h-0.5 bg-text-main"></span>
+        </button>
+      </div>
+      <div
+        id="mobile-menu"
+        class="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-lg"
+        style="display: none"
+      >
+        <ul class="flex flex-col py-3 px-6">
+          <li>
+            <a
+              href="services.html"
+              class="block py-3 text-sm font-semibold text-gold border-b border-gray-50"
+              >Services</a
+            >
+          </li>
+          <li>
+            <a
+              href="packages.html"
+              class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50"
+              >Packages</a
+            >
+          </li>
+          <li>
+            <a
+              href="about.html"
+              class="block py-3 text-sm font-medium text-text-sub border-b border-gray-50"
+              >About</a
+            >
+          </li>
+          <li class="pt-3">
+            <a
+              href="contact.html"
+              class="btn-gold block text-center py-3 rounded-sm text-sm text-white"
+              >Get Started</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-<section class="hero-bg pt-40 pb-20 px-6 lg:px-12">
-  <div class="max-w-5xl mx-auto relative z-10">
-    <div id="h-breadcrumb" class="flex items-center gap-2 text-xs text-text-muted mb-6"><a href="services.html" class="hover:text-gold transition-colors">Services</a><span>/</span><span class="text-text-sub">Android App Development</span></div>
-    <div id="h-badge" class="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full border border-gold/20 bg-gold/5"><span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse inline-block"></span><span class="text-xs tracking-widest uppercase text-gold font-semibold">Technology</span></div>
-    <h1 id="h-title" class="text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-5">Android App<br/><span class="gold-text">Development</span></h1>
-    <p id="h-sub" class="text-text-sub text-lg max-w-2xl leading-relaxed mb-8">Transform your business ideas into powerful Android applications that reach millions of users on the world's most popular mobile platform. We build fast, polished, and reliable apps from concept to Play Store.</p>
-    <div id="h-cta" class="flex flex-wrap gap-4">
-      <a href="contact.html" class="btn-gold px-8 py-4 rounded-sm text-sm uppercase tracking-widest text-white">Start Your App</a>
-      <a href="service-ios.html" class="btn-outline px-8 py-4 rounded-sm text-sm uppercase tracking-widest">Also Need iOS?</a>
-    </div>
-  </div>
-</section>
+    <section class="hero-bg pt-40 pb-20 px-6 lg:px-12">
+      <div class="max-w-5xl mx-auto relative z-10">
+        <div
+          id="h-breadcrumb"
+          class="flex items-center gap-2 text-xs text-text-muted mb-6"
+        >
+          <a href="services.html" class="hover:text-gold transition-colors"
+            >Services</a
+          ><span>/</span
+          ><span class="text-text-sub">Android App Development</span>
+        </div>
+        <div
+          id="h-badge"
+          class="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full border border-gold/20 bg-gold/5"
+        >
+          <span
+            class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse inline-block"
+          ></span
+          ><span
+            class="text-xs tracking-widest uppercase text-gold font-semibold"
+            >Technology</span
+          >
+        </div>
+        <h1
+          id="h-title"
+          class="text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-5"
+        >
+          Android App<br /><span class="gold-text">Development</span>
+        </h1>
+        <p
+          id="h-sub"
+          class="text-text-sub text-lg max-w-2xl leading-relaxed mb-8"
+        >
+          Transform your business ideas into powerful Android applications that
+          reach millions of users on the world's most popular mobile platform.
+          We build fast, polished, and reliable apps from concept to Play Store.
+        </p>
+        <div id="h-cta" class="flex flex-wrap gap-4">
+          <a
+            href="contact.html"
+            class="btn-gold px-8 py-4 rounded-sm text-sm uppercase tracking-widest text-white"
+            >Start Your App</a
+          >
+          <a
+            href="service-ios.html"
+            class="btn-outline px-8 py-4 rounded-sm text-sm uppercase tracking-widest"
+            >Also Need iOS?</a
+          >
+        </div>
+      </div>
+    </section>
 
-<section class="py-20 px-6 lg:px-12 bg-off-white">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-12 reveal"><div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">What We Deliver</div><h2 class="text-3xl lg:text-4xl font-black text-text-main">Everything Included in Every App</h2></div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="feat-card reveal"><div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"><svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg></div><h3 class="text-sm font-black text-text-main mb-2">Custom Android Apps</h3><p class="text-xs text-text-sub leading-relaxed">Native Android development built for your specific business needs — not a generic template.</p></div>
-      <div class="feat-card reveal"><div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"><svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg></div><h3 class="text-sm font-black text-text-main mb-2">UI/UX Design</h3><p class="text-xs text-text-sub leading-relaxed">Material Design–compliant interfaces that are intuitive, beautiful, and optimized for user engagement.</p></div>
-      <div class="feat-card reveal"><div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"><svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><h3 class="text-sm font-black text-text-main mb-2">App Testing</h3><p class="text-xs text-text-sub leading-relaxed">Tested across multiple Android versions and device sizes to ensure stability and performance everywhere.</p></div>
-      <div class="feat-card reveal"><div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"><svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg></div><h3 class="text-sm font-black text-text-main mb-2">Play Store Deployment</h3><p class="text-xs text-text-sub leading-relaxed">We handle the entire Google Play Store submission process — listing setup, screenshots, descriptions, and approval.</p></div>
-      <div class="feat-card reveal"><div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"><svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"/></svg></div><h3 class="text-sm font-black text-text-main mb-2">Maintenance &amp; Updates</h3><p class="text-xs text-text-sub leading-relaxed">Ongoing support to keep your app updated with new Android versions, security patches, and feature enhancements.</p></div>
-      <div class="feat-card reveal"><div class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"><svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3"/></svg></div><h3 class="text-sm font-black text-text-main mb-2">Backend &amp; API</h3><p class="text-xs text-text-sub leading-relaxed">Full-stack capability — we build the backend, APIs, and database alongside your Android app when needed.</p></div>
-    </div>
-  </div>
-</section>
+    <section class="py-20 px-6 lg:px-12 bg-off-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12 reveal">
+          <div
+            class="text-xs uppercase tracking-widest text-gold font-semibold mb-2"
+          >
+            What We Deliver
+          </div>
+          <h2 class="text-3xl lg:text-4xl font-black text-text-main">
+            Everything Included in Every App
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">
+              Custom Android Apps
+            </h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              Native Android development built for your specific business needs
+              — not a generic template.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">UI/UX Design</h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              Material Design–compliant interfaces that are intuitive,
+              beautiful, and optimized for user engagement.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">App Testing</h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              Tested across multiple Android versions and device sizes to ensure
+              stability and performance everywhere.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">
+              Play Store Deployment
+            </h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              We handle the entire Google Play Store submission process —
+              listing setup, screenshots, descriptions, and approval.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">
+              Maintenance &amp; Updates
+            </h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              Ongoing support to keep your app updated with new Android
+              versions, security patches, and feature enhancements.
+            </p>
+          </div>
+          <div class="feat-card reveal">
+            <div
+              class="w-10 h-10 icon-box rounded-sm flex items-center justify-center mb-4"
+            >
+              <svg
+                class="w-5 h-5 text-gold"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3"
+                />
+              </svg>
+            </div>
+            <h3 class="text-sm font-black text-text-main mb-2">
+              Backend &amp; API
+            </h3>
+            <p class="text-xs text-text-sub leading-relaxed">
+              Full-stack capability — we build the backend, APIs, and database
+              alongside your Android app when needed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section class="py-20 px-6 lg:px-12 bg-cream">
-  <div class="max-w-4xl mx-auto">
-    <div class="text-center mb-12 reveal"><div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Our Process</div><h2 class="text-3xl lg:text-4xl font-black text-text-main">From Idea to Play Store</h2></div>
-    <div class="space-y-8">
-      <div class="flex gap-6 items-start reveal"><div class="step-num">1</div><div><h3 class="text-base font-black text-text-main mb-1">Concept &amp; Scope</h3><p class="text-xs text-text-sub leading-relaxed">We define your app's features, target audience, monetization model, and technical requirements before anything else.</p></div></div>
-      <div class="gold-divider reveal"></div>
-      <div class="flex gap-6 items-start reveal"><div class="step-num">2</div><div><h3 class="text-base font-black text-text-main mb-1">UI/UX Wireframing</h3><p class="text-xs text-text-sub leading-relaxed">We design every screen as a wireframe first, then refine into high-fidelity mockups for your review and approval.</p></div></div>
-      <div class="gold-divider reveal"></div>
-      <div class="flex gap-6 items-start reveal"><div class="step-num">3</div><div><h3 class="text-base font-black text-text-main mb-1">Development</h3><p class="text-xs text-text-sub leading-relaxed">Native Android development using Kotlin/Java, with clean architecture, proper state management, and performance optimization.</p></div></div>
-      <div class="gold-divider reveal"></div>
-      <div class="flex gap-6 items-start reveal"><div class="step-num">4</div><div><h3 class="text-base font-black text-text-main mb-1">QA &amp; Testing</h3><p class="text-xs text-text-sub leading-relaxed">Manual and automated testing across Android versions (9, 10, 11, 12, 13, 14) on both physical and virtual devices.</p></div></div>
-      <div class="gold-divider reveal"></div>
-      <div class="flex gap-6 items-start reveal"><div class="step-num">5</div><div><h3 class="text-base font-black text-text-main mb-1">Play Store Launch</h3><p class="text-xs text-text-sub leading-relaxed">We submit your app, optimize the Play Store listing for discoverability, and monitor initial ratings and feedback post-launch.</p></div></div>
-    </div>
-  </div>
-</section>
+    <section class="py-20 px-6 lg:px-12 bg-cream">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12 reveal">
+          <div
+            class="text-xs uppercase tracking-widest text-gold font-semibold mb-2"
+          >
+            Our Process
+          </div>
+          <h2 class="text-3xl lg:text-4xl font-black text-text-main">
+            From Idea to Play Store
+          </h2>
+        </div>
+        <div class="space-y-8">
+          <div class="flex gap-6 items-start reveal">
+            <div class="step-num">1</div>
+            <div>
+              <h3 class="text-base font-black text-text-main mb-1">
+                Concept &amp; Scope
+              </h3>
+              <p class="text-xs text-text-sub leading-relaxed">
+                We define your app's features, target audience, monetization
+                model, and technical requirements before anything else.
+              </p>
+            </div>
+          </div>
+          <div class="gold-divider reveal"></div>
+          <div class="flex gap-6 items-start reveal">
+            <div class="step-num">2</div>
+            <div>
+              <h3 class="text-base font-black text-text-main mb-1">
+                UI/UX Wireframing
+              </h3>
+              <p class="text-xs text-text-sub leading-relaxed">
+                We design every screen as a wireframe first, then refine into
+                high-fidelity mockups for your review and approval.
+              </p>
+            </div>
+          </div>
+          <div class="gold-divider reveal"></div>
+          <div class="flex gap-6 items-start reveal">
+            <div class="step-num">3</div>
+            <div>
+              <h3 class="text-base font-black text-text-main mb-1">
+                Development
+              </h3>
+              <p class="text-xs text-text-sub leading-relaxed">
+                Native Android development using Kotlin/Java, with clean
+                architecture, proper state management, and performance
+                optimization.
+              </p>
+            </div>
+          </div>
+          <div class="gold-divider reveal"></div>
+          <div class="flex gap-6 items-start reveal">
+            <div class="step-num">4</div>
+            <div>
+              <h3 class="text-base font-black text-text-main mb-1">
+                QA &amp; Testing
+              </h3>
+              <p class="text-xs text-text-sub leading-relaxed">
+                Manual and automated testing across Android versions (9, 10, 11,
+                12, 13, 14) on both physical and virtual devices.
+              </p>
+            </div>
+          </div>
+          <div class="gold-divider reveal"></div>
+          <div class="flex gap-6 items-start reveal">
+            <div class="step-num">5</div>
+            <div>
+              <h3 class="text-base font-black text-text-main mb-1">
+                Play Store Launch
+              </h3>
+              <p class="text-xs text-text-sub leading-relaxed">
+                We submit your app, optimize the Play Store listing for
+                discoverability, and monitor initial ratings and feedback
+                post-launch.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section class="py-20 px-6 lg:px-12 bg-off-white">
-  <div class="max-w-3xl mx-auto">
-    <div class="text-center mb-10 reveal"><div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">FAQ</div><h2 class="text-3xl font-black text-text-main">Common Questions</h2></div>
-    <div class="space-y-0 reveal">
-      <div class="faq-item py-5"><div class="flex justify-between items-center"><span class="text-sm font-bold text-text-main">Do you build native or cross-platform apps?</span><span class="text-gold font-bold text-lg faq-icon">+</span></div><div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">We build native Android apps (Kotlin) for maximum performance and full platform integration. We also offer React Native cross-platform development if you need both Android and iOS from a single codebase.</div></div>
-      <div class="faq-item py-5"><div class="flex justify-between items-center"><span class="text-sm font-bold text-text-main">How long does an Android app take to build?</span><span class="text-gold font-bold text-lg faq-icon">+</span></div><div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">Simple apps with 5–8 screens typically take 4–8 weeks. Feature-rich apps with backend integration, payments, or real-time features usually take 3–5 months.</div></div>
-      <div class="faq-item py-5"><div class="flex justify-between items-center"><span class="text-sm font-bold text-text-main">Will you also build the backend/server?</span><span class="text-gold font-bold text-lg faq-icon">+</span></div><div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">Yes. We offer full-stack development including backend APIs, databases, and admin panels alongside your Android app. Or we can integrate with an existing API you already have.</div></div>
-      <div class="faq-item py-5"><div class="flex justify-between items-center"><span class="text-sm font-bold text-text-main">Do I need a Google Play developer account?</span><span class="text-gold font-bold text-lg faq-icon">+</span></div><div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">Yes — a Google Play developer account is required to publish apps and costs $25 (one-time). We'll walk you through creating one and handle the entire submission process on your behalf.</div></div>
-    </div>
-  </div>
-</section>
+    <section class="py-20 px-6 lg:px-12 bg-off-white">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-10 reveal">
+          <div
+            class="text-xs uppercase tracking-widest text-gold font-semibold mb-2"
+          >
+            FAQ
+          </div>
+          <h2 class="text-3xl font-black text-text-main">Common Questions</h2>
+        </div>
+        <div class="space-y-0 reveal">
+          <div class="faq-item py-5">
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-bold text-text-main"
+                >Do you build native or cross-platform apps?</span
+              ><span class="text-gold font-bold text-lg faq-icon">+</span>
+            </div>
+            <div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">
+              We build native Android apps (Kotlin) for maximum performance and
+              full platform integration. We also offer React Native
+              cross-platform development if you need both Android and iOS from a
+              single codebase.
+            </div>
+          </div>
+          <div class="faq-item py-5">
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-bold text-text-main"
+                >How long does an Android app take to build?</span
+              ><span class="text-gold font-bold text-lg faq-icon">+</span>
+            </div>
+            <div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">
+              Simple apps with 5–8 screens typically take 4–8 weeks.
+              Feature-rich apps with backend integration, payments, or real-time
+              features usually take 3–5 months.
+            </div>
+          </div>
+          <div class="faq-item py-5">
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-bold text-text-main"
+                >Will you also build the backend/server?</span
+              ><span class="text-gold font-bold text-lg faq-icon">+</span>
+            </div>
+            <div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">
+              Yes. We offer full-stack development including backend APIs,
+              databases, and admin panels alongside your Android app. Or we can
+              integrate with an existing API you already have.
+            </div>
+          </div>
+          <div class="faq-item py-5">
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-bold text-text-main"
+                >Do I need a Google Play developer account?</span
+              ><span class="text-gold font-bold text-lg faq-icon">+</span>
+            </div>
+            <div class="faq-answer pt-3 text-xs text-text-sub leading-relaxed">
+              Yes — a Google Play developer account is required to publish apps
+              and costs $25 (one-time). We'll walk you through creating one and
+              handle the entire submission process on your behalf.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section class="py-20 px-6 lg:px-12" style="background:linear-gradient(135deg,#111110 0%,#1a1a18 60%,#111110 100%)">
-  <div class="max-w-3xl mx-auto text-center reveal">
-    <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Ready to Launch Your <span class="gold-text">Android App?</span></h2>
-    <p class="text-gray-400 text-sm leading-relaxed mb-8 max-w-xl mx-auto">Tell us about your app concept and we'll scope it out and provide a free proposal — no commitment required.</p>
-    <div class="flex flex-wrap gap-4 justify-center">
-      <a href="contact.html" class="btn-gold px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-bold text-white">Get a Free Quote</a>
-      <a href="service-ios.html" class="inline-block px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-semibold text-white border border-white/20 hover:border-gold/50 hover:text-gold transition-all duration-200">Also Need iOS?</a>
-    </div>
-  </div>
-</section>
+    <section
+      class="py-20 px-6 lg:px-12"
+      style="
+        background: linear-gradient(
+          135deg,
+          #111110 0%,
+          #1a1a18 60%,
+          #111110 100%
+        );
+      "
+    >
+      <div class="max-w-3xl mx-auto text-center reveal">
+        <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">
+          Ready to Launch Your <span class="gold-text">Android App?</span>
+        </h2>
+        <p class="text-gray-400 text-sm leading-relaxed mb-8 max-w-xl mx-auto">
+          Tell us about your app concept and we'll scope it out and provide a
+          free proposal — no commitment required.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="contact.html"
+            class="btn-gold px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-bold text-white"
+            >Get a Free Quote</a
+          >
+          <a
+            href="service-ios.html"
+            class="inline-block px-10 py-4 rounded-sm text-sm uppercase tracking-widest font-semibold text-white border border-white/20 hover:border-gold/50 hover:text-gold transition-all duration-200"
+            >Also Need iOS?</a
+          >
+        </div>
+      </div>
+    </section>
 
-<footer class="py-12 px-6 lg:px-12 border-t border-mid-gray bg-off-white">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
-      <div class="md:col-span-2"><a href="index.html" class="inline-block mb-4"><img src="assets/images/logo/logo.png" alt="Renova" class="h-9 w-auto object-contain" /></a><p class="text-text-sub text-sm leading-relaxed max-w-xs">A full-service marketing and technology agency helping businesses build stronger brands across the USA and Canada.</p></div>
-      <div><div class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4">Services</div><ul class="space-y-2"><li><a href="service-web-design.html" class="text-xs text-text-sub hover:text-gold transition-colors">Website Development</a></li><li><a href="service-web-app.html" class="text-xs text-text-sub hover:text-gold transition-colors">Web Applications</a></li><li><a href="service-android.html" class="text-xs text-gold">Android Apps</a></li><li><a href="service-ios.html" class="text-xs text-text-sub hover:text-gold transition-colors">iOS Apps</a></li><li><a href="service-seo.html" class="text-xs text-text-sub hover:text-gold transition-colors">SEO Services</a></li><li><a href="service-branding.html" class="text-xs text-text-sub hover:text-gold transition-colors">Branding &amp; Design</a></li></ul></div>
-      <div><div class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4">Company</div><ul class="space-y-2"><li><a href="about.html" class="text-xs text-text-sub hover:text-gold transition-colors">About Us</a></li><li><a href="packages.html" class="text-xs text-text-sub hover:text-gold transition-colors">Packages</a></li><li><a href="contact.html" class="text-xs text-text-sub hover:text-gold transition-colors">Contact Us</a></li></ul></div>
-    </div>
-    <div class="gold-divider mb-6"></div>
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-3"><p class="text-xs text-text-muted">&copy; 2025 Renova Marketing Solutions. All rights reserved.</p><p class="text-xs text-text-muted">USA &amp; Canada</p></div>
-  </div>
-</footer>
-<script>
-gsap.registerPlugin(ScrollTrigger);
-(function(){const dot=document.createElement('div'),ring=document.createElement('div');dot.id='cursor-dot';ring.id='cursor-ring';Object.assign(dot.style,{position:'fixed',width:'6px',height:'6px',borderRadius:'50%',background:'#b8922a',pointerEvents:'none',zIndex:'9999',transform:'translate(-50%,-50%)',top:'0',left:'0'});Object.assign(ring.style,{position:'fixed',width:'32px',height:'32px',borderRadius:'50%',border:'1.5px solid rgba(184,146,42,0.5)',pointerEvents:'none',zIndex:'9998',transform:'translate(-50%,-50%)',top:'0',left:'0',transition:'width .3s,height .3s,border-color .3s'});document.body.appendChild(dot);document.body.appendChild(ring);let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;gsap.set(dot,{x:mx,y:my});});(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;gsap.set(ring,{x:rx,y:ry});requestAnimationFrame(loop);})();document.querySelectorAll('a,button,.feat-card').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(184,146,42,0.9)';});el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(184,146,42,0.5)';});});})();
-const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>navbar.classList.toggle('nav-scrolled',window.scrollY>60),{passive:true});document.getElementById('hamburger').addEventListener('click',e=>{e.stopPropagation();const m=document.getElementById('mobile-menu');m.style.display=m.style.display==='block'?'none':'block';});document.addEventListener('click',e=>{if(!navbar.contains(e.target))document.getElementById('mobile-menu').style.display='none';});
-gsap.set(['#h-badge','#h-title','#h-sub','#h-cta'],{opacity:0,y:28});gsap.timeline({delay:.1,defaults:{ease:'expo.out'}}).to('#h-badge',{opacity:1,y:0,duration:.7}).to('#h-title',{opacity:1,y:0,duration:.9},'-=.4').to('#h-sub',{opacity:1,y:0,duration:.75},'-=.5').to('#h-cta',{opacity:1,y:0,duration:.65},'-=.4');
-gsap.utils.toArray('.reveal').forEach((el,i)=>{gsap.set(el,{opacity:0,y:30});ScrollTrigger.create({trigger:el,start:'top 90%',once:true,onEnter:()=>gsap.to(el,{opacity:1,y:0,duration:.8,delay:(i%4)*.06,ease:'expo.out'})});});
-gsap.utils.toArray('.gold-divider').forEach(el=>{gsap.set(el,{scaleX:0,transformOrigin:'left center'});ScrollTrigger.create({trigger:el,start:'top 93%',once:true,onEnter:()=>gsap.to(el,{scaleX:1,duration:1,ease:'expo.out'})});});
-document.querySelectorAll('.btn-gold,.btn-outline').forEach(btn=>{btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.22,y:(e.clientY-r.top-r.height/2)*.18,duration:.4,ease:'power2.out'});});btn.addEventListener('mouseleave',()=>gsap.to(btn,{x:0,y:0,duration:.6,ease:'elastic.out(1,.5)'}));});
-document.querySelectorAll('.faq-item').forEach(item=>{item.addEventListener('click',()=>{const ans=item.querySelector('.faq-answer'),icon=item.querySelector('.faq-icon');const open=ans.style.display==='block';ans.style.display=open?'none':'block';icon.textContent=open?'+':'−';});});
-gsap.from('footer',{opacity:0,y:24,duration:.9,ease:'expo.out',scrollTrigger:{trigger:'footer',start:'top 95%',once:true}});
-</script>
-</body>
+    <footer class="py-12 px-6 lg:px-12 border-t border-mid-gray bg-off-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+          <div class="md:col-span-2">
+            <a href="index.html" class="inline-block mb-4"
+              ><img
+                src="assets/images/logo/logo.png"
+                alt="Renova"
+                class="h-9 w-auto object-contain"
+            /></a>
+            <p class="text-text-sub text-sm leading-relaxed max-w-xs">
+              A full-service marketing and technology agency helping businesses
+              build stronger brands across the USA and Canada.
+            </p>
+          </div>
+          <div>
+            <div
+              class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4"
+            >
+              Services
+            </div>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="service-web-design.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >Website Development</a
+                >
+              </li>
+              <li>
+                <a
+                  href="service-web-app.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >Web Applications</a
+                >
+              </li>
+              <li>
+                <a href="service-android.html" class="text-xs text-gold"
+                  >Android Apps</a
+                >
+              </li>
+              <li>
+                <a
+                  href="service-ios.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >iOS Apps</a
+                >
+              </li>
+              <li>
+                <a
+                  href="service-seo.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >SEO Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="service-branding.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >Branding &amp; Design</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div
+              class="text-xs uppercase tracking-widest text-text-muted font-bold mb-4"
+            >
+              Company
+            </div>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="about.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="packages.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >Packages</a
+                >
+              </li>
+              <li>
+                <a
+                  href="contact.html"
+                  class="text-xs text-text-sub hover:text-gold transition-colors"
+                  >Contact Us</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="gold-divider mb-6"></div>
+        <div
+          class="flex flex-col sm:flex-row items-center justify-between gap-3"
+        >
+          <p class="text-xs text-text-muted">
+            &copy; 2025 Renova Marketing Solutions. All rights reserved.
+          </p>
+          <p class="text-xs text-text-muted">USA &amp; Canada</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+      (function () {
+        const dot = document.createElement("div"),
+          ring = document.createElement("div");
+        dot.id = "cursor-dot";
+        ring.id = "cursor-ring";
+        Object.assign(dot.style, {
+          position: "fixed",
+          width: "6px",
+          height: "6px",
+          borderRadius: "50%",
+          background: "#b8922a",
+          pointerEvents: "none",
+          zIndex: "9999",
+          transform: "translate(-50%,-50%)",
+          top: "0",
+          left: "0",
+        });
+        Object.assign(ring.style, {
+          position: "fixed",
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          border: "1.5px solid rgba(184,146,42,0.5)",
+          pointerEvents: "none",
+          zIndex: "9998",
+          transform: "translate(-50%,-50%)",
+          top: "0",
+          left: "0",
+          transition: "width .3s,height .3s,border-color .3s",
+        });
+        document.body.appendChild(dot);
+        document.body.appendChild(ring);
+        let mx = 0,
+          my = 0,
+          rx = 0,
+          ry = 0;
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+          gsap.set(dot, { x: mx, y: my });
+        });
+        (function loop() {
+          rx += (mx - rx) * 0.1;
+          ry += (my - ry) * 0.1;
+          gsap.set(ring, { x: rx, y: ry });
+          requestAnimationFrame(loop);
+        })();
+        document.querySelectorAll("a,button,.feat-card").forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            ring.style.width = "52px";
+            ring.style.height = "52px";
+            ring.style.borderColor = "rgba(184,146,42,0.9)";
+          });
+          el.addEventListener("mouseleave", () => {
+            ring.style.width = "32px";
+            ring.style.height = "32px";
+            ring.style.borderColor = "rgba(184,146,42,0.5)";
+          });
+        });
+      })();
+      const navbar = document.getElementById("navbar");
+      window.addEventListener(
+        "scroll",
+        () => navbar.classList.toggle("nav-scrolled", window.scrollY > 60),
+        { passive: true },
+      );
+      document.getElementById("hamburger").addEventListener("click", (e) => {
+        e.stopPropagation();
+        const m = document.getElementById("mobile-menu");
+        m.style.display = m.style.display === "block" ? "none" : "block";
+      });
+      document.addEventListener("click", (e) => {
+        if (!navbar.contains(e.target))
+          document.getElementById("mobile-menu").style.display = "none";
+      });
+      gsap.set(["#h-badge", "#h-title", "#h-sub", "#h-cta"], {
+        opacity: 0,
+        y: 28,
+      });
+      gsap
+        .timeline({ delay: 0.1, defaults: { ease: "expo.out" } })
+        .to("#h-badge", { opacity: 1, y: 0, duration: 0.7 })
+        .to("#h-title", { opacity: 1, y: 0, duration: 0.9 }, "-=.4")
+        .to("#h-sub", { opacity: 1, y: 0, duration: 0.75 }, "-=.5")
+        .to("#h-cta", { opacity: 1, y: 0, duration: 0.65 }, "-=.4");
+      gsap.utils.toArray(".reveal").forEach((el, i) => {
+        gsap.set(el, { opacity: 0, y: 30 });
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 90%",
+          once: true,
+          onEnter: () =>
+            gsap.to(el, {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              delay: (i % 4) * 0.06,
+              ease: "expo.out",
+            }),
+        });
+      });
+      gsap.utils.toArray(".gold-divider").forEach((el) => {
+        gsap.set(el, { scaleX: 0, transformOrigin: "left center" });
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 93%",
+          once: true,
+          onEnter: () =>
+            gsap.to(el, { scaleX: 1, duration: 1, ease: "expo.out" }),
+        });
+      });
+      document.querySelectorAll(".btn-gold,.btn-outline").forEach((btn) => {
+        btn.addEventListener("mousemove", (e) => {
+          const r = btn.getBoundingClientRect();
+          gsap.to(btn, {
+            x: (e.clientX - r.left - r.width / 2) * 0.22,
+            y: (e.clientY - r.top - r.height / 2) * 0.18,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        });
+        btn.addEventListener("mouseleave", () =>
+          gsap.to(btn, {
+            x: 0,
+            y: 0,
+            duration: 0.6,
+            ease: "elastic.out(1,.5)",
+          }),
+        );
+      });
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          const ans = item.querySelector(".faq-answer"),
+            icon = item.querySelector(".faq-icon");
+          const open = ans.style.display === "block";
+          ans.style.display = open ? "none" : "block";
+          icon.textContent = open ? "+" : "−";
+        });
+      });
+      gsap.from("footer", {
+        opacity: 0,
+        y: 24,
+        duration: 0.9,
+        ease: "expo.out",
+        scrollTrigger: { trigger: "footer", start: "top 95%", once: true },
+      });
+    </script>
+  </body>
 </html>
