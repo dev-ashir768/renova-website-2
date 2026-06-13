@@ -123,18 +123,6 @@
     }
     .step-line.done { background: #b8922a; }
 
-    .map-placeholder {
-      background: #f0efe9;
-      border: 1px solid #e4e3dc;
-      position: relative;
-      overflow: hidden;
-    }
-    .map-placeholder::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(184,146,42,0.05) 0%, transparent 60%);
-    }
 
     /* FAQ */
     .faq-item { background: #fff; border: 1px solid #e8e7e2; }
@@ -562,54 +550,6 @@
     </div>
   </div>
 </section>
-
-
-<!-- ════════════════════════════════════
-     MAP PLACEHOLDER
-════════════════════════════════════ -->
-<section class="py-20 px-6 lg:px-12 bg-off-white">
-  <div class="max-w-7xl mx-auto">
-    <div class="reveal mb-10">
-      <div class="inline-flex items-center gap-2 mb-3">
-        <div class="w-6 h-px bg-gold opacity-60"></div>
-        <span class="text-xs uppercase tracking-widest text-gold font-semibold">Serving North America</span>
-      </div>
-      <h2 class="text-3xl lg:text-4xl font-black text-text-main">USA <span class="gold-text">&</span> Canada Coverage</h2>
-    </div>
-    <div class="map-placeholder reveal rounded-sm overflow-hidden" style="height:340px;">
-      <div class="w-full h-full flex flex-col items-center justify-center gap-4 relative z-10">
-        <!-- Decorative map dots -->
-        <div class="relative w-full max-w-2xl h-48">
-          <!-- North America outline suggestion -->
-          <div style="position:absolute;top:10%;left:15%;width:70%;height:80%;border:1px solid rgba(184,146,42,0.2);border-radius:40% 40% 50% 50%;"></div>
-          <!-- City dots -->
-          <div style="position:absolute;top:22%;left:25%;width:8px;height:8px;background:#b8922a;border-radius:50%;box-shadow:0 0 0 4px rgba(184,146,42,0.15);" title="New York"></div>
-          <div style="position:absolute;top:18%;left:20%;width:6px;height:6px;background:#b8922a;border-radius:50%;box-shadow:0 0 0 3px rgba(184,146,42,0.12);" title="Toronto"></div>
-          <div style="position:absolute;top:30%;left:15%;width:6px;height:6px;background:#b8922a;border-radius:50%;box-shadow:0 0 0 3px rgba(184,146,42,0.12);" title="Chicago"></div>
-          <div style="position:absolute;top:40%;left:10%;width:8px;height:8px;background:#b8922a;border-radius:50%;box-shadow:0 0 0 4px rgba(184,146,42,0.15);" title="Los Angeles"></div>
-          <div style="position:absolute;top:12%;left:30%;width:6px;height:6px;background:#b8922a;border-radius:50%;box-shadow:0 0 0 3px rgba(184,146,42,0.12);" title="Montreal"></div>
-          <div style="position:absolute;top:35%;left:22%;width:7px;height:7px;background:#b8922a;border-radius:50%;box-shadow:0 0 0 3px rgba(184,146,42,0.12);" title="Dallas"></div>
-          <div style="position:absolute;top:25%;left:28%;width:6px;height:6px;background:#b8922a;border-radius:50%;box-shadow:0 0 0 3px rgba(184,146,42,0.12);" title="Miami"></div>
-          <div style="position:absolute;top:8%;left:5%;width:7px;height:7px;background:#b8922a;border-radius:50%;box-shadow:0 0 0 3px rgba(184,146,42,0.12);" title="Vancouver"></div>
-          <!-- Lines between dots -->
-          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.15" viewBox="0 0 400 200">
-            <line x1="100" y1="44" x2="80" y2="36" stroke="#b8922a" stroke-width="1"/>
-            <line x1="100" y1="44" x2="60" y2="60" stroke="#b8922a" stroke-width="1"/>
-            <line x1="100" y1="44" x2="120" y2="24" stroke="#b8922a" stroke-width="1"/>
-            <line x1="40" y1="80" x2="60" y2="60" stroke="#b8922a" stroke-width="1"/>
-            <line x1="80" y1="16" x2="120" y2="24" stroke="#b8922a" stroke-width="1"/>
-            <line x1="88" y1="70" x2="112" y2="50" stroke="#b8922a" stroke-width="1"/>
-          </svg>
-        </div>
-        <div class="text-center">
-          <div class="text-sm font-semibold text-text-sub">Serving clients across</div>
-          <div class="text-lg font-black gold-text">United States & Canada</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <!-- ════════════════════════════════════
      FAQ
