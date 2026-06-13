@@ -30,7 +30,7 @@
     <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
       <li><a href="services.html" class="${cls(isServices)}">Services</a></li>
       <li><a href="packages.html" class="${cls(isPackages)}">Packages</a></li>
-      <li><a href="portfolio.html" class="${cls(isPortfolio)}">Portfolio</a></li>
+      <li><a href="portfolio.php" class="${cls(isPortfolio)}">Portfolio</a></li>
       <li><a href="about.html" class="${cls(isAbout)}">About</a></li>
       <li><a href="contact.html" class="btn-gold px-5 py-2.5 rounded-sm text-sm text-white${isContact ? ' ring-2 ring-gold/40' : ''}">Get Started</a></li>
     </ul>
@@ -44,7 +44,7 @@
     <ul class="flex flex-col py-3 px-6">
       <li><a href="services.html" class="block py-3 text-sm ${isServices ? 'font-semibold text-gold' : 'font-medium text-text-sub'} border-b border-gray-50">Services</a></li>
       <li><a href="packages.html" class="block py-3 text-sm ${isPackages ? 'font-semibold text-gold' : 'font-medium text-text-sub'} border-b border-gray-50">Packages</a></li>
-      <li><a href="portfolio.html" class="block py-3 text-sm ${isPortfolio ? 'font-semibold text-gold' : 'font-medium text-text-sub'} border-b border-gray-50">Portfolio</a></li>
+      <li><a href="portfolio.php" class="block py-3 text-sm ${isPortfolio ? 'font-semibold text-gold' : 'font-medium text-text-sub'} border-b border-gray-50">Portfolio</a></li>
       <li><a href="about.html" class="block py-3 text-sm ${isAbout ? 'font-semibold text-gold' : 'font-medium text-text-sub'} border-b border-gray-50">About</a></li>
       <li class="pt-3"><a href="contact.html" class="btn-gold block text-center py-3 rounded-sm text-sm text-white">Get Started</a></li>
     </ul>
@@ -86,7 +86,7 @@
         <ul class="space-y-2">
           <li><a href="about.html"           class="text-xs text-text-sub hover:text-gold transition-colors">About Us</a></li>
           <li><a href="packages.html"        class="text-xs text-text-sub hover:text-gold transition-colors">Packages</a></li>
-          <li><a href="portfolio.html" class="text-xs text-text-sub hover:text-gold transition-colors">Portfolio</a></li>
+          <li><a href="portfolio.php" class="text-xs text-text-sub hover:text-gold transition-colors">Portfolio</a></li>
           <li><a href="contact.html"         class="text-xs text-text-sub hover:text-gold transition-colors">Contact Us</a></li>
           <li><a href="services.html"        class="text-xs text-text-sub hover:text-gold transition-colors">All Services</a></li>
         </ul>

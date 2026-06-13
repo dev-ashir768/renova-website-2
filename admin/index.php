@@ -179,12 +179,10 @@ $msg = $_GET['msg'] ?? '';
           <td><?= htmlspecialchars($item['year'] ?? '—') ?></td>
           <td><?= (int)$item['sort_order'] ?></td>
           <td>
-            <a href="index.php?toggle=<?= $item['id'] ?>" title="Click to toggle">
-              <label class="toggle-switch" onclick="return false;">
-                <input type="checkbox" <?= $item['status'] ? 'checked' : '' ?> onchange="window.location='index.php?toggle=<?= $item['id'] ?>'">
-                <span class="slider"></span>
-              </label>
-            </a>
+            <label class="toggle-switch" title="Click to toggle active/inactive" onclick="window.location='index.php?toggle=<?= $item['id'] ?>'">
+              <input type="checkbox" <?= $item['status'] ? 'checked' : '' ?> onclick="event.preventDefault()">
+              <span class="slider"></span>
+            </label>
           </td>
           <td>
             <div class="actions">
