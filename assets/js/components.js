@@ -25,7 +25,7 @@
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 px-6 lg:px-12">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
     <a href="index.html">
-      <img src="assets/images/logo/logo.png" alt="Renova Marketing Solutions" class="h-10 w-auto object-contain" />
+      <img src="assets/images/logo/logo.png" alt="Renova Marketing Solutions" class="h-14 w-auto object-contain" />
     </a>
     <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
       <li><a href="services.html" class="${cls(isServices)}">Services</a></li>
@@ -58,7 +58,7 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
       <div class="md:col-span-2">
         <a href="index.html" class="inline-block mb-4">
-          <img src="assets/images/logo/logo.png" alt="Renova Marketing Solutions" class="h-9 w-auto object-contain" />
+          <img src="assets/images/logo/logo.png" alt="Renova Marketing Solutions" class="h-12 w-auto object-contain" />
         </a>
         <p class="text-text-sub text-sm leading-relaxed max-w-xs">A full-service marketing and technology agency helping businesses build stronger brands across the USA and Canada.</p>
         <p class="text-text-muted text-xs mt-3 italic">Creative Solutions. Measurable Results. Lasting Growth.</p>
