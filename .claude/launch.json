@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "renova-2",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "4201", "."],
+      "port": 4201
+    }
+  ]
+}
